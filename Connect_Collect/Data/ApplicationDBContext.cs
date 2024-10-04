@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿ using System.Collections.Generic;
 using Connect_Collect.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Connect_Collect.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj": {}
+    "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj": {
+    "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj",
+        "projectUniqueName": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
         "projectName": "Connect_Collect",
-        "projectPath": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj",
-        "packagesPath": "C:\\Users\\shrao\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\obj\\",
+        "projectPath": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
+        "packagesPath": "C:\\Users\\masbh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\shrao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\masbh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
