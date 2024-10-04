@@ -1,3 +1,4 @@
 .vs/
 Connect_Collect/migrations
-
+Connect_Collect/obj/Debug
+Connect_Collect\obj\Debug
