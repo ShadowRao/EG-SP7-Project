@@ -4,6 +4,7 @@ using Connect_Collect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Connect_Collect.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241003100851_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,9 +135,6 @@ namespace Connect_Collect.Migrations
 
                     b.HasKey("SellerId");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.ToTable("Seller");
                 });
 
@@ -170,23 +170,6 @@ namespace Connect_Collect.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("Connect_Collect.Models.Entities.Review", b =>
-                {
-                    b.HasOne("Connect_Collect.Models.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("Connect_Collect.Models.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
