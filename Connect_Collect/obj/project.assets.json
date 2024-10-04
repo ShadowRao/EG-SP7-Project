@@ -4111,11 +4111,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj",
+      "projectUniqueName": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
       "projectName": "Connect_Collect",
-      "projectPath": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj",
+      "projectPath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
       "packagesPath": "C:\\Users\\shrao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\obj\\",
+      "outputPath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\shrao\\AppData\\Roaming\\NuGet\\NuGet.Config",

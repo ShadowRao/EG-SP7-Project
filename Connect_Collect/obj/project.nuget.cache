@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9j0wj/IjWfw=",
+  "dgSpecHash": "Gr+ZIy8uxdA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\shrao\\source\\repos\\Connect_Collect\\Connect_Collect\\Connect_Collect.csproj",
+  "projectFilePath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shrao\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\shrao\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
