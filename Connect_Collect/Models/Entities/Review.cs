@@ -27,5 +27,4 @@ namespace Connect_Collect.Models.Entities
         public virtual Customer? Customer { get; set; } // Reference to the Customer
     }
 }
-}
-}
+

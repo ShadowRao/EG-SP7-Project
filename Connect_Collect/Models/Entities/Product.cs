@@ -12,13 +12,12 @@ namespace Connect_Collect.Models.Entities
         public required string ProductName { get; set; }
         [ForeignKey("Seller")]
         public Guid SellerId { get; set; }
-        [ForeignKey("Customer")]
-        public Guid CustomerId { get; set; }
+        
         public required string ProductDescription { get; set; }
         
         public byte[]? Image { get; set; }
         public int Price { get; set; }
         public virtual Seller? Seller { get; set; }
-        public virtual Customer? Customer { get; set; }
+
     }
 }
