@@ -4106,19 +4106,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\masbh\\.nuget\\packages\\": {}
+    "C:\\Users\\sugow\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
+      "projectUniqueName": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
       "projectName": "Connect_Collect",
-      "projectPath": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
-      "packagesPath": "C:\\Users\\masbh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\masbh\\source\\repos\\EG-SP7-Project\\Connect_Collect\\obj\\",
+      "projectPath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj",
+      "packagesPath": "C:\\Users\\sugow\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_Collect\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\masbh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sugow\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

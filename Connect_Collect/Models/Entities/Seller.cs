@@ -8,15 +8,15 @@ namespace Connect_Collect.Models.Entities
         public Guid SellerId { get; set; }
         [Required(ErrorMessage ="Name is required")]
         [MaxLength(100)]
-        public required string SellerName { get; set; }
+        public string? SellerName { get; set; }
 
         [EmailAddress]
         [Required(ErrorMessage ="Email is required")]
-        public required string email { get; set; }
+        public string? Email { get; set; }
         [Required(ErrorMessage ="Password is required")]
-        public required string passsword { get; set; }
+        public required string Passsword { get; set; }
         [Required(ErrorMessage ="Contact number is required")]
-        public required string Contact { get; set; }  
+        public string? Contact { get; set; }  
         
     }
 }

@@ -18,6 +18,8 @@ namespace Connect_Collect.Data
 
         public DbSet<Cart> Cart { get; set; }
 
+        public DbSet<Review> Review { get; set; }
+
 /*        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cart>()
