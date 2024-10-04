@@ -17,6 +17,8 @@ namespace Connect_Collect.Models.Entities
         
         public byte[]? Image { get; set; }
         public int Price { get; set; }
+        public ICollection<Cart>? Cart { get; set; }
+
         public virtual Seller? Seller { get; set; }
 
     }

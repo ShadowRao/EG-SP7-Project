@@ -5,15 +5,16 @@ namespace Connect_Collect.Models.Entities
 {
     public class Cart
     {
-        [Key]
-        public int Id { get; set; }
-
-        public Guid? CustomerId { get; set; }
-
-        public Guid? ProductId { get; set; }
-
+        [Key, Column(Order = 0)]
+        public Guid CustomerId { get; set; }
         public virtual Customer? Customer { get; set; }
+
+        [Key, Column(Order = 1)]
+        public Guid ProductId { get; set; }
+
         public virtual Product? Product { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]
+        public int Quantity { get; set; }
     }
 }

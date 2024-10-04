@@ -18,7 +18,8 @@ namespace Connect_Collect.Models.Entities
         [Required(ErrorMessage ="Password is required")]
         public string? Password { get; set; }
         public string? Address { get; set; }
-        
+
+        public ICollection<Cart>? Cart { get; set; }
 
     }
 }
