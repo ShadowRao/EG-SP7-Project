@@ -20,12 +20,19 @@ namespace Connect_Collect.Controllers
         {
             return View();
         }
-        [HttpPost]
-       /* public IActionResult Add(AddCustomerViewModel viewModel)
+        [HttpGet]
+        public async Task<IActionResult> Home(Guid Id)
         {
-            return View();
+            var customerdata = await dbContext.Customer.FindAsync(Id);
+            return View(customerdata);
         }
-        [HttpGet]*/
+
+        /* public IActionResult Add(AddCustomerViewModel viewModel)
+         {
+             return View();
+         }
+         [HttpGet]*/
+        [HttpPost]
         public async Task<IActionResult> AddCustomer(AddCustomerViewModel viewModel)
         {
             var customer = new Customer

@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+ <h1>Welcome, @Model.CustomerName!</h1>
+
+<div class="mt-4">
+    <h2>Your Dashboard</h2>
+    <p>Here you can manage your profile, view your orders, and explore our products.</p>
+</div>
+
+<div class="mt-4">
+    <h3>Your Profile</h3>
+    <p>Email: @Model.Email</p>
+    @* <a asp-action="EditProfile" class="btn btn-secondary">Edit Profile</a> *@
+</div>
+
+@* <div class="mt-4">
+    <h3>Your Orders</h3>
+    <ul>
+        @foreach (var order in Model.Orders)
+        {
+            <li>
+                Order ID: @order.OrderId - Status: @order.Status
+                <a asp-action="ViewOrder" asp-route-id="@order.OrderId" class="btn btn-link">View Details</a>
+            </li>
+        }
+    </ul>
+    <a asp-action="Orders" class="btn btn-primary">View All Orders</a>
+</div>
+
+<div class="mt-4">
+    <h3>Explore Products</h3>
+    <p>Check out our latest offerings!</p>
+    <a asp-action="Products" class="btn btn-success">Browse Products</a>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Logout" class="btn btn-danger">Logout</a>
+</div>
+ *@
