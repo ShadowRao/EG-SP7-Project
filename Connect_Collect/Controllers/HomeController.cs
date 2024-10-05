@@ -36,14 +36,23 @@ namespace Connect_Collect.Controllers
                 return View(model);
             }
                 
-            // Verify the email and password
-            var user = dbContext.Customer
+            // Verify the email and password of a customer
+            var CUser = dbContext.Customer
                 .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password); // Make sure to hash passwords in real applications
 
-            if (user != null)
+            // Verify the email and password of a Seller
+            var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+
+            if (CUser != null)
             {
                 // Redirect to the desired page after successful login
-                return RedirectToAction("Home", "Customer", new { Id = user.CustomerId }); // Adjust as necessary
+                return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId }); // Adjust as necessary
+            }
+
+            if (SUser != null)
+            {
+                // Redirect to the desired page after successful login
+                return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId }); // Adjust as necessary
             }
 
             // Add an error message to the model state if login fails

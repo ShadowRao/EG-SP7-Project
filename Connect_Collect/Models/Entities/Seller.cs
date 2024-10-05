@@ -14,7 +14,7 @@ namespace Connect_Collect.Models.Entities
         [Required(ErrorMessage ="Email is required")]
         public string? Email { get; set; }
         [Required(ErrorMessage ="Password is required")]
-        public required string Passsword { get; set; }
+        public required string Password { get; set; }
         [Required(ErrorMessage ="Contact number is required")]
         public string? Contact { get; set; }  
         
