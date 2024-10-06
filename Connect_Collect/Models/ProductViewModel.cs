@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Connect_Collect.Models.Entities
+namespace Connect_Collect.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-
-        [Key]
         public Guid ProductId { get; set; }
 
         public required string ProductName { get; set; }
-        [ForeignKey("Seller")]
         public Guid SellerId { get; set; }
-        
+
         public required string ProductDescription { get; set; }
 
         [NotMapped]
@@ -21,9 +18,5 @@ namespace Connect_Collect.Models.Entities
         public string? ImageUrl { get; set; }  // Store image URL or file path
 
         public int Price { get; set; }
-        public ICollection<Cart>? Cart { get; set; }
-
-        public virtual Seller? Seller { get; set; }
-
     }
 }

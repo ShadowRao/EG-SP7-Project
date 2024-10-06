@@ -91,5 +91,24 @@ namespace Connect_Collect.Controllers
             }
             return RedirectToAction("List", "Customer");
         }
+
+        public IActionResult ViewProducts()
+        {
+            var products = dbContext.Product;
+
+            // Manually map to ProductViewModel
+            var productViewModels = products.Select(product => new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                ProductDescription = product.ProductDescription,
+                Price = product.Price,
+                ImageUrl = product.ImageUrl,
+                SellerId = product.SellerId,
+            });
+
+            // Return the view with the mapped ProductViewModel collection
+            return View(productViewModels.ToList());
+        }
     }
 }
