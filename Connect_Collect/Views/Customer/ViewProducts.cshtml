@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Products";
 }
 
@@ -10,7 +9,8 @@
         @foreach (var product in Model)
         {
             <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 card-hover">
+                    @* Add class 'card-hover' for the animation *@
                     @* Display product image if available *@
                     @if (!string.IsNullOrEmpty(product.ImageUrl))
                     {
@@ -37,3 +37,20 @@
         }
     </div>
 </div>
+
+
+<style>
+    .card-hover {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        /* Scale the card up when hovered */
+        .card-hover:hover {
+            transform: translateY(-10px); /* Makes the card 'jump' up */
+        }
+
+    .btn:hover {
+        transform: translateY(-5px); /* Move up slightly */
+        transition: transform 0.3s ease-in-out;
+    }
+</style>

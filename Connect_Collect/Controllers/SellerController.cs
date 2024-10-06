@@ -88,7 +88,7 @@ namespace Connect_Collect.Controllers
                 dbContext.Product.Add(product);
                 await dbContext.SaveChangesAsync();
 
-                return RedirectToAction("ViewProducts");
+                return RedirectToAction("AddProduct");
 
             }
 
