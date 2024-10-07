@@ -1,0 +1,118 @@
+﻿/* General page styling */
+body {
+    background-color: #E6E6FA; /* Lavender background */
+    color: #2D1E3E; /* Dark purple text */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Headings */
+h1 {
+    color: #4B0082; /* Indigo heading for contrast */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Center the seller signup button above the form */
+a.seller-signup {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px; /* Add space between this and the form */
+}
+
+/* Seller signup button styling */
+a button {
+    background-color: #D8BFD8; /* Light purple */
+    border: none;
+    color: #2D1E3E;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    a button:hover {
+        background-color: #BA55D3; /* Darker purple on hover */
+    }
+
+/* Form Labels */
+.form-label {
+    color: #2D1E3E; /* Very dark purple for text */
+    font-weight: bold;
+}
+
+/* Input fields styling */
+input.form-control {
+    border: 2px solid #9370DB; /* Light purple outline for textboxes */
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: none;
+    background-color: #F8F8FF; /* GhostWhite background for input fields */
+    color: #2D1E3E; /* Text inside input fields */
+}
+
+    input.form-control:focus {
+        border-color: #BA55D3; /* Slightly darker purple on focus */
+        outline: none;
+    }
+
+/* SAVE button styling */
+button.btn-primary {
+    background-color: #BA55D3; /* Light purple */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    button.btn-primary:hover {
+        background-color: #8A2BE2; /* Darker purple on hover */
+    }
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    accent-color: #BA55D3; /* Purple checkbox */
+}
+
+.form-check-input {
+    accent-color: #BA55D3; /* Purple checkbox */
+    margin-left: 15px; /* Move checkbox to the right */
+}
+
+/* Terms and conditions label */
+/* Terms and conditions label */
+.form-check-label {
+    color: #2D1E3E; /* Dark purple for the label text */
+    margin-left: 35px; /* Increase space between checkbox and label */
+    vertical-align: middle; /* Align label text vertically with the checkbox */
+}
+
+
+/* Error message styling */
+.text-danger {
+    color: #FF6347; /* Red for errors */
+    font-weight: bold;
+}
+
+/* Terms and conditions label */
+.form-check-label {
+    color: #2D1E3E; /* Dark purple */
+}
+
+/* Margin for form elements */
+.mt-3 {
+    margin-top: 20px;
+}
+
+/* Centering form */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white; /* White background for the form */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
