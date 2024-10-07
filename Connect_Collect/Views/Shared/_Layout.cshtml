@@ -30,12 +30,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List">List of Customers</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="AddCustomer">Signup</a>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-signin" asp-area="" asp-controller="Home" asp-action="SignIn">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-signup" asp-area="" asp-controller="Customer" asp-action="AddCustomer">Sign Up</a>
+                            </li>
+                    </ul>
+                       @*  <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="AddCustomer">SignUp</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignIn">Login</a>
-                        </li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignIn">SignIn</a>
+                        </li> *@
                     </ul>
                 </div>
             </div>

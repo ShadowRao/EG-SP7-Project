@@ -4,23 +4,28 @@
 @{
 }
 @model Connect_Collect.Models.AddCustomerViewModel 
-<link rel="stylesheet" href="~/css/CommonStyle.css" />
+
+<link rel="stylesheet" href="~/css/CommonStyle.css"/>
+
 <h1> Customer Signup </h1>
+
 <a asp-controller="Seller" asp-action="AddSeller" class="seller-signup">
-    <button type="button">Are you Seller? Click here to sign up</button>
+    <button type="button">Are you a seller? Click here to sign up</button>
 </a>
+
 <form method="post" id="customerSignup">
     <div class="mt-3">
         <label class="form-label"> CustomerName</label>
         <input type="text" class="form-control" asp-for="CustomerName"/>
     </div>
-    <div class="mt-3">
+@*     <div class="mt-3">
         <label class="form-label"> CustomerId</label>
         <input type="text" class="form-control" asp-for="CustomerId" />
-    </div>
+    </div> *@
     <div class="mt-3">
         <label class="form-label"> Email</label>
-        <input type="text" class="form-control" asp-for="Email"/>    </div>
+        <input type="text" class="form-control" asp-for="Email"/>   
+    </div>
     <div class="mt-3">
         <label class="form-label"> Password</label>
         <input type="password" id="password" class="form-control" asp-for="Password"/>
@@ -34,7 +39,10 @@
         <label class="form-label"> Address </label>
         <input type="text" class="form-control" asp-for="Address"/>
     </div>
-
+    <div class="mt-3">
+        <label class="form-label"> Contact Number </label>
+        <input type="text" class="form-control" asp-for="Contact" />
+    </div> 
     <div class="mt-3">
         <input type="checkbox" class="form-check-input" id="terms" required />
         <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
