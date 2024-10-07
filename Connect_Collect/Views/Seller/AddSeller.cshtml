@@ -6,32 +6,54 @@
 @model Connect_Collect.Models.AddSellerViewModel
 
 <h1>Seller Signup</h1>
-<form method="post">
+<form method="post" id="signupForm">
     <div class="mt-3">
-        <label class="form-label"> SellerName</label>
-        <input type="text" class="form-control" asp-for="SellerName" />
+        <label class="form-label">Seller Name</label>
+        <input type="text" class="form-control" asp-for="SellerName" required />
     </div>
     <div class="mt-3">
-        <label class="form-label"> SellerId</label>
-        <input type="text" class="form-control" asp-for="SellerId" />
+        <label class="form-label">Seller ID</label>
+        <input type="text" class="form-control" asp-for="SellerId" required />
     </div>
     <div class="mt-3">
-        <label class="form-label"> Email</label>
-        <input type="text" class="form-control" asp-for="Email" />
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" asp-for="Email" required />
     </div>
     <div class="mt-3">
-        <label class="form-label"> Password</label>
-        <input type="password" class="form-control" asp-for="Password" />
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" asp-for="Password" id="password" required />
     </div>
     <div class="mt-3">
-        <label class="form-label"> Contact </label>
-        <input type="text" class="form-control" asp-for="Contact" />
+        <label class="form-label">Re-enter Password</label>
+        <input type="password" class="form-control" id="repassword" required />
+        <div id="passwordError" class="text-danger" style="display:none;">Passwords do not match!</div>
     </div>
-    @* <div class="mt-3">
-    <input type="checkbox" class="form-check-input" id="finish" asp-for="finish"/>
-    <label class="form-check-label" for="finish"> Finish </label>
-    </div> *@
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary"> SAVE </button>
+        <label class="form-label">Contact</label>
+        <input type="text" class="form-control" asp-for="Contact" required />
     </div>
+    <div class="mt-3">
+        <input type="checkbox" class="form-check-input" id="terms" required />
+        <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">SUBMIT</button>
+    </div>
+
 </form>
+
+<script>
+    const form = document.getElementById('signupForm');
+    const passwordInput = document.getElementById('password');
+    const repasswordInput = document.getElementById('repassword');
+    const passwordError = document.getElementById('passwordError');
+
+    form.addEventListener('submit', function(event) {
+        if (passwordInput.value !== repasswordInput.value) {
+            event.preventDefault(); // Prevent form submission
+            passwordError.style.display = 'block'; // Show error message
+        } else {
+            passwordError.style.display = 'none'; // Hide error message
+        }
+    });
+</script>
