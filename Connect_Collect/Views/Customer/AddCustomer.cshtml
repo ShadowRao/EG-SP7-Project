@@ -9,7 +9,7 @@
 <a asp-controller="Seller" asp-action="AddSeller">
     <button type="button">Are you Seller? Click here to sign up</button>
 </a>
-<form method="post">
+<form method="post" id="customerSignup">
     <div class="mt-3">
         <label class="form-label"> CustomerName</label>
         <input type="text" class="form-control" asp-for="CustomerName"/>
@@ -20,21 +20,43 @@
     </div>
     <div class="mt-3">
         <label class="form-label"> Email</label>
-        <input type="text" class="form-control" asp-for="Email"/>
-    </div>
+        <input type="text" class="form-control" asp-for="Email"/>    </div>
     <div class="mt-3">
         <label class="form-label"> Password</label>
-        <input type="password" class="form-control" asp-for="Password"/>
+        <input type="password" id="password" class="form-control" asp-for="Password"/>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">Re-enter Password</label>
+        <input type="password" class="form-control" id="repassword" required />
+        <div id="passwordError" class="text-danger" style="display:none;">Passwords do not match!</div>
     </div>
     <div class="mt-3">
         <label class="form-label"> Address </label>
         <input type="text" class="form-control" asp-for="Address"/>
     </div>
-    @* <div class="mt-3">
-        <input type="checkbox" class="form-check-input" id="finish" asp-for="finish"/>
-        <label class="form-check-label" for="finish"> Finish </label>
-    </div> *@
+
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary"> SAVE </button>
+        <input type="checkbox" class="form-check-input" id="terms" required />
+        <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
     </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" style="padding: 4px 8px; font-size: 12px;">SAVE</button>
+    </div>
+
 </form>
+
+<script>
+    const form = document.getElementById('customerSignup');
+    const passwordInput = document.getElementById('password');
+    const repasswordInput = document.getElementById('repassword');
+    const passwordError = document.getElementById('passwordError');
+
+    form.addEventListener('submit', function (event) {
+        if (passwordInput.value !== repasswordInput.value) {
+            event.preventDefault(); // Prevent form submission
+            passwordError.style.display = 'block'; // Show error message
+        } else {
+            passwordError.style.display = 'none'; // Hide error message
+        }
+    });
+</script>
