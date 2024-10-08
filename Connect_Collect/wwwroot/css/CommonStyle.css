@@ -1,8 +1,16 @@
 ﻿/* General page styling */
 body {
-    background-color: #E6E6FA; /* Lavender background */
+    background-image: url("/images/bg.gif");
+    background-size: cover; /* Ensure the GIF covers the entire background */
+    background-repeat: no-repeat; /* Prevent the GIF from repeating */
+    background-position: center; /* Center the GIF */
+    height: 140vh; /* Set the body to take up the full height of the viewport */
+    margin: 0;
+    padding: 0;
     color: #2D1E3E; /* Dark purple text */
     font-family: 'Arial', sans-serif;
+
+    /*background-color: #E6E6FA;  Lavender background */
 }
 
 /* Headings */
@@ -108,14 +116,17 @@ input[type="checkbox"] {
 }
 
 /* Centering form */
+/* Form styling */
 form {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 25px auto 0; /* Move the form downwards (100px from the top) */
     padding: 20px;
-    background-color: white; /* White background for the form */
+    background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for aesthetics */
+    overflow-x: auto; /* Add horizontal scroll if needed */
 }
+
 .btn-signin, .btn-signup {
     background-color: #BA55D3; /* Light purple */
     border: none;
@@ -140,3 +151,78 @@ form {
 .btn-signup {
     background-color: #BA55D3; /* Light purple for Sign Up */
 }
+
+/* Center the privacy content */
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 800px; /* Limits the width for better readability */
+    line-height: 1.6;
+}
+
+/* Footer adjustments */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Style for the privacy page container similar to the home page */
+.privacy-container {
+    max-width: 800px; /* Restrict width for better readability */
+    text-align: center;
+    padding: 20px;
+    margin: 100px auto 0; /* Move the content downwards (100px from the top) */
+    background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for aesthetics */
+}
+.display-4 {
+    font-size: 2.5rem; /* Adjust this value to make it slightly smaller */
+    /* You can also add other styles if needed */
+}
+
+
+/* Box styling */
+/*.privacy-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ /* Soft shadow */
+    /*max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}*/
+
+.home-container {
+    max-width: 100%; /* Set to 100% to utilize full width */
+    padding: 20px;
+    margin: 100px auto 0; /* Move the content downwards (100px from the top) */
+    background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for aesthetics */
+    overflow-x: auto; /* Add horizontal scroll if needed */
+}
+/* Custom DELETE button styling */
+.btn-danger-custom {
+    background-color: #9370DB; /* Tomato red background */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}DG
+
+    .btn-danger-custom:hover {
+        background-color: #8A2BE2; /* Darker red on hover */
+        color: white;
+    }
