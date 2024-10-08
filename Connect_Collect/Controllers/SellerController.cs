@@ -46,10 +46,14 @@ namespace Connect_Collect.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddProduct()
+        public IActionResult AddProduct(Guid id)
         {
             // Populate the seller list for the dropdown
             ViewBag.SellerList = new SelectList(dbContext.Seller, "SellerId", "SellerName");
+
+            ViewBag.SellerId = id;
+            var seller = dbContext.Seller
+                .FirstOrDefault(s => s.SellerId == id);
             return View();
         }
 

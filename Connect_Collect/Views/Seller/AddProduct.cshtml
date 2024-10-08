@@ -14,12 +14,16 @@
             <input asp-for="ProductName" class="form-control" />
             <span asp-validation-for="ProductName" class="text-danger"></span>
         </div>
+        <p>Seller1d: @ViewBag.SellerId</p> <!-- This will help you debug if ViewBag.SellerId is correctly set -->
 
         <div class="form-group mt-3">
-            <label asp-for="SellerId" class="control-label">Seller</label>
-            <select asp-for="SellerId" class="form-control" asp-items="ViewBag.SellerList"></select>
+            @* <label asp-for="SellerId" class="control-label">Seller</label> *@
+            @* <select asp-for="SellerId" class="form-control" asp-items="ViewBag.SellerList"></select> *@
+            <input type="hidden" name="SellerId" value="@ViewBag.SellerId" />
+
             <span asp-validation-for="SellerId" class="text-danger"></span>
         </div>
+
 
         <div class="form-group mt-3">
             <label asp-for="ProductDescription" class="control-label">Product Description</label>
