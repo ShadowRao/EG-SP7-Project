@@ -45,7 +45,7 @@ namespace Connect_Collect.Controllers
 
             if (CUser != null)
             {
-                // Redirect to the desired page after successful login
+                // Redi rect to the desired page after successful login
                 return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId }); // Adjust as necessary
             }
 

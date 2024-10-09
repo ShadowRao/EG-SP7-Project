@@ -1,17 +1,33 @@
 ﻿/* General page styling */
-body {
+/*body {
     background-image: url("/images/bg.gif");
-    background-size: cover; /* Ensure the GIF covers the entire background */
-    background-repeat: no-repeat; /* Prevent the GIF from repeating */
-    background-position: center; /* Center the GIF */
-    height: 140vh; /* Set the body to take up the full height of the viewport */
-    margin: 0;
+    background-size: cover;*/ /* Ensure the GIF covers the entire background */
+    /*background-repeat: no-repeat;*/ /* Prevent the GIF from repeating */
+    /*background-position: center;*/ /* Center the GIF */
+    /*height: 140vh;*/ /* Set the body to take up the full height of the viewport */
+    /*margin: 0;
     padding: 0;
-    color: #2D1E3E; /* Dark purple text */
-    font-family: 'Arial', sans-serif;
+    color: #2D1E3E;*/ /* Dark purple text */
+    /*font-family: 'Arial', sans-serif;*/
 
     /*background-color: #E6E6FA;  Lavender background */
+/*}*/
+/*Privacy, home, sign up and sign pages' background (gif) */
+.default-background {
+    background-image: url("/images/stationarybg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 140vh; /* Full height of the viewport */
 }
+.gif-background {
+    background-image: url("/images/bg.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 140vh; /* Full height of the viewport */
+}
+
 
 /* Headings */
 h1 {
@@ -225,4 +241,28 @@ footer {
     .btn-danger-custom:hover {
         background-color: #8A2BE2; /* Darker red on hover */
         color: white;
+    }
+/*.form-control {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;*/ /* Smooth transition */
+/*}*/
+
+    /* Glow effect on hover */
+    /*.form-control:hover, .form-control:focus {
+        border-color: lavender;*/ /* Change border color */
+        /*box-shadow: 0 0 10px lavender, 0 0 20px lavender;*/ /* Glowing effect */
+        /*outline: none;*/ /* Remove default outline */
+    /*}*/
+
+/* Base input field styles */
+.form-control {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
+
+    /* Dark purple glow effect on hover */
+    .form-control:hover, .form-control:focus {
+        border-color: #4B0082; /* Indigo border color */
+        box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082; /* Indigo glowing effect */
+        /*border-color: #5C4B8A;*/ /* Dark purple border color */
+        /*box-shadow: 0 0 10px #7A4B9C, 0 0 20px #7A4B9C;*/ /*Bright purple highlight for form fields upon hover*/
+        outline: none; /* Remove default outline */
     }
