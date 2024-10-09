@@ -259,10 +259,23 @@ footer {
 }
 
     /* Dark purple glow effect on hover */
-    .form-control:hover, .form-control:focus {
-        border-color: #4B0082; /* Indigo border color */
-        box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082; /* Indigo glowing effect */
+    /*.form-control:hover, .form-control:focus {
+        border-color: #4B0082;*/ /* Indigo border color */
+        /*box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082;*/ /* Indigo glowing effect */
         /*border-color: #5C4B8A;*/ /* Dark purple border color */
         /*box-shadow: 0 0 10px #7A4B9C, 0 0 20px #7A4B9C;*/ /*Bright purple highlight for form fields upon hover*/
+        /*outline: none;*/ /* Remove default outline */
+    /*}*/
+    .form-control:hover,
+    .form-control:focus {
+        border-color: #4B0082; /* Indigo border color */
+        box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082; /* Indigo glowing effect */
         outline: none; /* Remove default outline */
     }
+/* Transparent navbar background */
+
+.transparent-navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */
+    backdrop-filter: blur(10px); /* Optional: adds a blur effect */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Optional: adds a subtle border */
+}
