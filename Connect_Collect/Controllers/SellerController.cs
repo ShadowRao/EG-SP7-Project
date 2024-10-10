@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace Connect_Collect.Controllers
 {
@@ -31,17 +32,22 @@ namespace Connect_Collect.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSeller(AddSellerViewModel viewModel)
         {
+            // Create an instance of PasswordHasher to hash the password
+            var passwordHasher = new PasswordHasher<Seller>();
+
             var seller = new Seller
             {
                 SellerName = viewModel.SellerName,
                 SellerId = viewModel.SellerId,
                 Email = viewModel.Email,
-                Password = viewModel.Password,
+                // Hash the password before saving it to the database
+                Password = passwordHasher.HashPassword(null, viewModel.Password),
                 Contact = viewModel.Contact,
-                //Finish=viewModel.Finish
             };
+
             await dbContext.Seller.AddAsync(seller);
             await dbContext.SaveChangesAsync();
+
             return View();
         }
 

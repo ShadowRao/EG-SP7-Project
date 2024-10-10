@@ -2,6 +2,7 @@
 using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Connect_Collect.Controllers
@@ -35,18 +36,23 @@ namespace Connect_Collect.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCustomer(AddCustomerViewModel viewModel)
         {
+            // Create an instance of PasswordHasher to hash the password
+            var passwordHasher = new PasswordHasher<Customer>();
+
             var customer = new Customer
             {
                 CustomerName = viewModel.CustomerName,
                 CustomerId = viewModel.CustomerId,
-                Email=viewModel.Email,
-                Password=viewModel.Password,
-                Address=viewModel.Address,
-                Contact=viewModel.Contact,
-                //Finish=viewModel.Finish
+                Email = viewModel.Email,
+                // Hash the password before saving it to the database
+                Password = passwordHasher.HashPassword(null, viewModel.Password),
+                Address = viewModel.Address,
+                Contact = viewModel.Contact,
             };
+
             await dbContext.Customer.AddAsync(customer);
             await dbContext.SaveChangesAsync();
+
             return View();
         }
 

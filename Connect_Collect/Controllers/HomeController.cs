@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Connect_Collect.Data;
 using Connect_Collect.Models;
+using Connect_Collect.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,26 +39,43 @@ namespace Connect_Collect.Controllers
             }
                 
             // Verify the email and password of a customer
-            var CUser = dbContext.Customer
-                .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password); // Make sure to hash passwords in real applications
+            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email); // Make sure to hash passwords in real applications
 
             // Verify the email and password of a Seller
-            var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+            var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
 
             //Verify the email and password of a Admin
             var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
             if (CUser != null)
             {
-                // Redi rect to the desired page after successful login
-                return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId }); // Adjust as necessary
+                var passwordHasher = new PasswordHasher<Customer>();
+                var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, model.Password);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    Console.WriteLine("Customer logged in successfully.");
+                    return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId });
+                }
+                
+
             }
 
             if (SUser != null)
             {
-                // Redirect to the desired page after successful login
-                return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId }); // Adjust as necessary
+                var passwordHasher = new PasswordHasher<Seller>();
+                var result = passwordHasher.VerifyHashedPassword(SUser, SUser.Password, model.Password);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    Console.WriteLine("Seller logged in successfully.");
+                    return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId });
+                }
+                
             }
+
+
+
 
             if (AUser != null)
             {
