@@ -42,6 +42,7 @@ namespace Connect_Collect.Controllers
                 Email=viewModel.Email,
                 Password=viewModel.Password,
                 Address=viewModel.Address,
+                Contact=viewModel.Contact,
                 //Finish=viewModel.Finish
             };
             await dbContext.Customer.AddAsync(customer);
