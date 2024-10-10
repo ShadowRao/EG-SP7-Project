@@ -21,13 +21,21 @@
 
 
 
-<div class="mt-4">
+@* <div class="mt-4">
     <h3>Products</h3>
     <p>Sell products here!</p>
     <a asp-action="AddProduct" asp-route-id="@Model.SellerId" class="btn btn-success">Add Products</a>
+    <a asp-action="ViewOrders" asp-route-id="@Model.SellerId" class="btn btn-view-orders">View Orders</a>
+
+</div> *@
+<div class="mt-4">
+    <h3>Products</h3>
+    <p>Sell products here!</p>
+    <a asp-action="AddProduct" asp-route-id="@Model.SellerId" class="btn btn-add-products">Add Products</a>
+    <a asp-action="ViewOrders" asp-route-id="@Model.SellerId" class="btn btn-view-orders">View Orders</a>
 </div>
 
 
-@* <div class="mt-4">
+@* <div class="mt-4"
     <a asp-action="Logout" class="btn btn-danger">Logout</a>
 </div> *@

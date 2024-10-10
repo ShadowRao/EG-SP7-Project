@@ -257,6 +257,23 @@ footer {
 .form-control {
     transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
+ /*Seller Dahsboard Buttons*/
+.btn-view-orders {
+    background-color: #4B0082; /* Indigo */
+    border: none;
+    color: #483D8B;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-view-orders:hover {
+    background-color: #483D8B; /* Darker indigo/blue on hover */
+}
+
+
 
     /* Dark purple glow effect on hover */
     /*.form-control:hover, .form-control:focus {
@@ -266,6 +283,8 @@ footer {
         /*box-shadow: 0 0 10px #7A4B9C, 0 0 20px #7A4B9C;*/ /*Bright purple highlight for form fields upon hover*/
         /*outline: none;*/ /* Remove default outline */
     /*}*/
+
+
     .form-control:hover,
     .form-control:focus {
         border-color: #4B0082; /* Indigo border color */
