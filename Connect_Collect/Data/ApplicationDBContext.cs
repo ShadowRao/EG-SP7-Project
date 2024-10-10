@@ -20,7 +20,9 @@ namespace Connect_Collect.Data
 
         public DbSet<Review> Review { get; set; }
 
+        public DbSet<Admin> Admin { get; set; }
         public DbSet<Order> Order { get; set; }
+
 
         /*        protected override void OnModelCreating(ModelBuilder modelBuilder)
                 {

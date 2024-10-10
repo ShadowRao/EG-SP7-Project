@@ -32,7 +32,7 @@
                         <td>@customer.Password</td>
                         <td>@customer.Address</td>
                         <td>
-                            <a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId">
+                            <a asp-controller="Admin" asp-action="CustomerEdit" asp-route-id="@customer.CustomerId">
                                 <button type="button">Edit</button>
                             </a>
                         </td>

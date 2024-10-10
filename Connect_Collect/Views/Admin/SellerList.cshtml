@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "List of Sellers";
+
+}
+<link rel="stylesheet" href="~/css/CommonStyle.css" />
+<div class="home-container">
+    <h1>Seller Table</h1>
+    <div class="table-responsive">
+        <!-- Make the table responsive -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>SellerId</th>
+                    <th>SellerName</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Contact</th>
+                    <th>Actions</th> <!-- Add header for action buttons -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var seller in Model)
+                {
+                        <tr>
+                            <td>@seller.SellerId</td>
+                            <td>@seller.SellerName</td>
+                            <td>@seller.Email</td>
+                            <td>@seller.Password</td>
+                            <td>@seller.Contact</td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="SellerEdit" asp-route-id="@seller.SellerId">
+                                    <button type="button">Edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
