@@ -99,6 +99,20 @@ namespace Connect_Collect.Controllers
             return View(model);  // Handle case when no file is uploaded
         }
 
+        //Viewing orders from the seller dashboard
+        [HttpGet]
+        public async Task<IActionResult> ViewOrders(Guid id)
+        {
+            // Fetch all orders related to the seller by SellerId
+            var orders = await dbContext.Order
+                .Where(o => o.SellerId == id)
+                .Include(o => o.Customer) // Optionally include related customer data
+                .ToListAsync();
+
+            // Pass the list of orders to the view
+            return View(orders);
+        }
+
 
 
 

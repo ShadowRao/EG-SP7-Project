@@ -16,7 +16,7 @@ namespace Connect_Collect.Models.Entities
         [Required(ErrorMessage ="Password is required")]
         public required string Password { get; set; }
         [Required(ErrorMessage ="Contact number is required")]
-        public string? Contact { get; set; }  
-        
+        public string? Contact { get; set; }
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

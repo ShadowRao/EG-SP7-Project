@@ -21,5 +21,6 @@ namespace Connect_Collect.Models.Entities
 
         public ICollection<Cart>? Cart { get; set; }
 
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
