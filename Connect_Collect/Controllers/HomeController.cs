@@ -43,6 +43,9 @@ namespace Connect_Collect.Controllers
             // Verify the email and password of a Seller
             var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
+            //Verify the email and password of a Admin
+            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+
             if (CUser != null)
             {
                 // Redi rect to the desired page after successful login
@@ -53,6 +56,12 @@ namespace Connect_Collect.Controllers
             {
                 // Redirect to the desired page after successful login
                 return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId }); // Adjust as necessary
+            }
+
+            if (AUser != null)
+            {
+                // Redirect to the desired page after successful login
+                return RedirectToAction("Home", "Admin", new { Id = AUser.AdminId }); // Adjust as necessary
             }
 
             // Add an error message to the model state if login fails

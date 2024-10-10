@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Welcome, @Model.AdminName!</h1>
+
+<div class="mt-4">
+    <h2>Your Dashboard</h2>
+    <p>Here you can manage Sellers and Customers.</p>
+</div>
+<div class="mt-4">
+    <h3>Manage Seller</h3>
+    <p>Sell products here!</p>
+    <a asp-action="SellerList"  class="btn btn-success">Seller</a>
+</div>
+
+<div class="mt-4">
+    <h3>Manage Customer</h3>
+    <p>Sell products here!</p>
+    <a asp-action="CustomerList" class="btn btn-success">Customer</a>
+</div>
