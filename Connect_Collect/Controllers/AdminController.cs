@@ -1,5 +1,7 @@
 ﻿using Connect_Collect.Data;
+using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,34 @@ namespace Connect_Collect.Controllers
         public AdminController(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(AdminViewModel viewModel)
+        {
+            // Create an instance of PasswordHasher to hash the password
+            var passwordHasher = new PasswordHasher<Admin>();
+
+            var admin = new Admin
+            {
+                AdminName = viewModel.AdminName,
+                AdminId = viewModel.AdminId,
+                Email = viewModel.Email,
+                // Hash the password before saving it to the database
+                Password = passwordHasher.HashPassword(null, viewModel.Password),
+                
+            };
+
+            await dbContext.Admin.AddAsync(admin);
+            await dbContext.SaveChangesAsync();
+
+            return View();
         }
 
 

@@ -40,14 +40,14 @@ namespace Connect_Collect.Controllers
                 return View(model);
             }
                 
-            // Verify the email and password of a customer
-            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email); // Make sure to hash passwords in real applications
+            // Verify email is valid of Customer
+            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email);
 
-            // Verify the email and password of a Seller
-            var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
+            // Verify email is valid of Seller
+            var SUser = dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
 
-            //Verify the email and password of a Admin
-            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+            // Verify email is valid of Admin
+            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email);
 
 
             if (CUser != null)

@@ -57,7 +57,9 @@ namespace Connect_Collect.Controllers
             await dbContext.Seller.AddAsync(seller);
             await dbContext.SaveChangesAsync();
 
-            return View();
+            ViewBag.SuccessMessage = "Successfully signed up. Please login.";
+
+            return RedirectToAction("SignIn", "Home");
         }
 
         [HttpGet]
