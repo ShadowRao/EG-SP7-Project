@@ -69,6 +69,20 @@ namespace Connect_Collect.Data
             .WithMany(c => c.Cart) // Assuming a product can be in many carts
             .HasForeignKey(c => c.ProductId)
                 .OnDelete(DeleteBehavior.Cascade); // Optional: Define delete behavior
+
+            // Set DeleteBehavior.Restrict for Seller to avoid cascade paths
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Seller)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(o => o.SellerId)
+                .OnDelete(DeleteBehavior.Restrict); // No cascading delete for Seller
+
+            // Keep cascading delete for Customer
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete for Customer
         }
     }
 }

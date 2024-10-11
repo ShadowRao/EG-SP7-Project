@@ -38,14 +38,14 @@ namespace Connect_Collect.Controllers
                 return View(model);
             }
                 
-            // Verify the email and password of a customer
-            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email); // Make sure to hash passwords in real applications
+            // Verify email is valid of Customer
+            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email);
 
-            // Verify the email and password of a Seller
-            var SUser= dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
+            // Verify email is valid of Seller
+            var SUser = dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
 
-            //Verify the email and password of a Admin
-            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+            // Verify email is valid of Admin
+            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email);
 
             if (CUser != null)
             {
@@ -54,10 +54,8 @@ namespace Connect_Collect.Controllers
 
                 if (result == PasswordVerificationResult.Success)
                 {
-                    Console.WriteLine("Customer logged in successfully.");
                     return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId });
                 }
-                
 
             }
 
@@ -68,19 +66,24 @@ namespace Connect_Collect.Controllers
 
                 if (result == PasswordVerificationResult.Success)
                 {
-                    Console.WriteLine("Seller logged in successfully.");
+                    
                     return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId });
                 }
                 
             }
 
 
-
-
             if (AUser != null)
             {
                 // Redirect to the desired page after successful login
-                return RedirectToAction("Home", "Admin", new { Id = AUser.AdminId }); // Adjust as necessary
+                var passwordHasher = new PasswordHasher<Admin>();
+                var result = passwordHasher.VerifyHashedPassword(AUser, AUser.Password, model.Password);
+
+                if (result == PasswordVerificationResult.Success)
+                {
+                    
+                    return RedirectToAction("Home", "Admin", new { Id = AUser.AdminId });
+                }
             }
 
             // Add an error message to the model state if login fails
