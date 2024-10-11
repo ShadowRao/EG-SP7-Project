@@ -7,17 +7,18 @@
 <h1>Welcome, @Model.AdminName!</h1>
 
 <div class="mt-4">
-    <h2>Your Dashboard</h2>
-    <p>Here you can manage Sellers and Customers.</p>
-</div>
-<div class="mt-4">
-    <h3>Manage Seller</h3>
-    <p>Sell products here!</p>
-    <a asp-action="SellerList"  class="btn btn-success">Seller</a>
+    <h2>Administrator Dashboard</h2>
+    <p>Manage all sellers and customers from here. Use the options below to view, edit, or remove any entries in the system.</p>
 </div>
 
 <div class="mt-4">
-    <h3>Manage Customer</h3>
-    <p>Sell products here!</p>
-    <a asp-action="CustomerList" class="btn btn-success">Customer</a>
+    <h3>Seller Management</h3>
+    <p>Click the button below to view and manage all registered sellers. You can add new sellers or update seller information as needed.</p>
+    <a asp-action="SellerList" class="btn btn-success">View Sellers</a>
+</div>
+
+<div class="mt-4">
+    <h3>Customer Management</h3>
+    <p>Click the button below to manage customer accounts. You can view customer details, add new customers, or make changes to existing records.</p>
+    <a asp-action="CustomerList" class="btn btn-success">View Customers</a>
 </div>

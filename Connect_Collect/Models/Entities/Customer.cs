@@ -19,6 +19,8 @@ namespace Connect_Collect.Models.Entities
         public string? Password { get; set; }
         public string? Address { get; set; }
 
+        public string? Contact { get; set; }
+
         public ICollection<Cart>? Cart { get; set; }
 
         public ICollection<Order> Orders { get; set; } = new List<Order>();

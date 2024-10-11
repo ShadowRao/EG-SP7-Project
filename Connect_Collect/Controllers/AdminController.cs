@@ -1,5 +1,7 @@
 ﻿using Connect_Collect.Data;
+using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +16,48 @@ namespace Connect_Collect.Controllers
             this.dbContext = dbContext;
         }
 
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(AdminViewModel viewModel)
+        {
+            // Create an instance of PasswordHasher to hash the password
+            var passwordHasher = new PasswordHasher<Admin>();
+
+            var admin = new Admin
+            {
+                AdminName = viewModel.AdminName,
+                AdminId = viewModel.AdminId,
+                Email = viewModel.Email,
+                // Hash the password before saving it to the database
+                Password = passwordHasher.HashPassword(null, viewModel.Password),
+                
+            };
+
+            await dbContext.Admin.AddAsync(admin);
+            await dbContext.SaveChangesAsync();
+
+            return View();
+        }
+
 
         [HttpGet]
-        public async Task<IActionResult> Home(Guid Id)
+        public async Task<IActionResult> Home()
         {
-            var admindata = await dbContext.Admin.FindAsync(Id);
+            var adminIdClaim = User.FindFirst("AdminId")?.Value;
+
+            if (adminIdClaim == null)
+            {
+                // Handle the case where AdminId is not found in claims
+                return RedirectToAction("SignIn", "Home"); // Redirect to sign in page or an error page
+            }
+            var adminId = Guid.Parse(adminIdClaim); // Parse the AdminId
+            var admindata = await dbContext.Admin.FindAsync(adminId);
+            //var admindata = await dbContext.Admin.FindAsync(Id);
             return View(admindata);
         }
 

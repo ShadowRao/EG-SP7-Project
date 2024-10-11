@@ -4,6 +4,8 @@ using Connect_Collect.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+
 using System.Threading.Tasks;
 using System.Linq;
 using System.IO;
@@ -22,8 +24,17 @@ namespace Connect_Collect.Controllers
         [HttpGet]
         public async Task<IActionResult> Home(Guid Id)
         {
-            var sellerData = await dbContext.Seller.FindAsync(Id);
-            return View(sellerData);
+            var SellerIdClaim = User.FindFirst("SellerId")?.Value;
+
+            if (SellerIdClaim == null)
+            {
+                // Handle the case where AdminId is not found in claims
+                return RedirectToAction("SignIn", "Home"); // Redirect to sign in page or an error page
+            }
+            var sellerId = Guid.Parse(SellerIdClaim); // Parse the AdminId
+            var sellerdata = await dbContext.Seller.FindAsync(sellerId);
+            //var sellerdata = await dbContext.Seller.FindAsync(Id);
+            return View(sellerdata);
         }
 
         [HttpGet]
@@ -35,17 +46,25 @@ namespace Connect_Collect.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSeller(AddSellerViewModel viewModel)
         {
+            // Create an instance of PasswordHasher to hash the password
+            var passwordHasher = new PasswordHasher<Seller>();
+
             var seller = new Seller
             {
                 SellerName = viewModel.SellerName,
                 SellerId = viewModel.SellerId,
                 Email = viewModel.Email,
-                Password = viewModel.Password,
+                // Hash the password before saving it to the database
+                Password = passwordHasher.HashPassword(null, viewModel.Password),
                 Contact = viewModel.Contact,
             };
+
             await dbContext.Seller.AddAsync(seller);
             await dbContext.SaveChangesAsync();
-            return View();
+
+            ViewBag.SuccessMessage = "Successfully signed up. Please login.";
+
+            return RedirectToAction("SignIn", "Home");
         }
 
         [HttpGet]
