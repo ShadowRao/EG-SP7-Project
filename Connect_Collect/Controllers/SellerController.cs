@@ -21,7 +21,16 @@ namespace Connect_Collect.Controllers
         [HttpGet]
         public async Task<IActionResult> Home(Guid Id)
         {
-            var sellerdata = await dbContext.Seller.FindAsync(Id);
+            var SellerIdClaim = User.FindFirst("SellerId")?.Value;
+
+            if (SellerIdClaim == null)
+            {
+                // Handle the case where AdminId is not found in claims
+                return RedirectToAction("SignIn", "Home"); // Redirect to sign in page or an error page
+            }
+            var sellerId = Guid.Parse(SellerIdClaim); // Parse the AdminId
+            var sellerdata = await dbContext.Seller.FindAsync(sellerId);
+            //var sellerdata = await dbContext.Seller.FindAsync(Id);
             return View(sellerdata);
         }
         [HttpGet]

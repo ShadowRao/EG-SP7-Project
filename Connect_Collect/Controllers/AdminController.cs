@@ -16,9 +16,18 @@ namespace Connect_Collect.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Home(Guid Id)
+        public async Task<IActionResult> Home()
         {
-            var admindata = await dbContext.Admin.FindAsync(Id);
+            var adminIdClaim = User.FindFirst("AdminId")?.Value;
+
+            if (adminIdClaim == null)
+            {
+                // Handle the case where AdminId is not found in claims
+                return RedirectToAction("SignIn", "Home"); // Redirect to sign in page or an error page
+            }
+            var adminId = Guid.Parse(adminIdClaim); // Parse the AdminId
+            var admindata = await dbContext.Admin.FindAsync(adminId);
+            //var admindata = await dbContext.Admin.FindAsync(Id);
             return View(admindata);
         }
 

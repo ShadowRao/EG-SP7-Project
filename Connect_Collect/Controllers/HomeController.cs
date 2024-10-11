@@ -1,7 +1,9 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using Connect_Collect.Data;
 using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +33,7 @@ namespace Connect_Collect.Controllers
 
         [HttpGet]
         //Verifies login for customer while signing in
-        public IActionResult SignIn(SignInModel model)
+        public async Task<IActionResult> SignIn(SignInModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -47,18 +49,29 @@ namespace Connect_Collect.Controllers
             //Verify the email and password of a Admin
             var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
+
             if (CUser != null)
             {
                 var passwordHasher = new PasswordHasher<Customer>();
                 var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, model.Password);
 
-                if (result == PasswordVerificationResult.Success)
-                {
-                    Console.WriteLine("Customer logged in successfully.");
-                    return RedirectToAction("Home", "Customer", new { Id = CUser.CustomerId });
-                }
                 
 
+                if (result == PasswordVerificationResult.Success)
+                {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, CUser.Email),
+                        new Claim(ClaimTypes.Role, "Customer"),
+                        new Claim("CustomerId", CUser.CustomerId.ToString()) // Store CustomerId as a claim
+                    };
+                    var identity = new ClaimsIdentity(claims, "Customer");
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await HttpContext.SignInAsync(principal);
+                    Console.WriteLine("Customer logged in successfully.");
+                    return RedirectToAction("Home", "Customer");
+                }
             }
 
             if (SUser != null)
@@ -68,19 +81,37 @@ namespace Connect_Collect.Controllers
 
                 if (result == PasswordVerificationResult.Success)
                 {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, SUser.Email),
+                        new Claim(ClaimTypes.Role, "Seller"),
+                        new Claim("SellerId", SUser.SellerId.ToString()) // Store CustomerId as a claim
+                    };
+                    var identity = new ClaimsIdentity(claims, "Seller");
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await HttpContext.SignInAsync(principal);
                     Console.WriteLine("Seller logged in successfully.");
-                    return RedirectToAction("Home", "Seller", new { Id = SUser.SellerId });
+                    return RedirectToAction("Home", "Seller");
                 }
                 
             }
 
-
-
-
             if (AUser != null)
             {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, AUser.Email),
+                    new Claim(ClaimTypes.Role, "Admin"),
+                    new Claim("AdminId", AUser.AdminId.ToString()) // Store CustomerId as a claim
+                };
+                var identity = new ClaimsIdentity(claims, "Admin");
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(principal);
+
                 // Redirect to the desired page after successful login
-                return RedirectToAction("Home", "Admin", new { Id = AUser.AdminId }); // Adjust as necessary
+                return RedirectToAction("Home", "Admin"); 
             }
 
             // Add an error message to the model state if login fails
