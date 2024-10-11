@@ -1,0 +1,23 @@
+﻿@model Connect_Collect.Models.Entities.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>@Model.ProductName</h2>
+
+@if (!string.IsNullOrEmpty(Model.ImageUrl))
+{
+    <img src="@Model.ImageUrl" alt="@Model.ProductName" style="max-width: 300px; height: auto;" />
+}
+else
+{
+    <img src="~/images/placeholder.png" alt="No Image" style="max-width: 300px; height: auto;" />
+}
+
+<p><strong>Description:</strong> @Model.ProductDescription</p>
+<p><strong>Price:</strong> $@Model.Price</p>
+<p><strong>Seller:</strong> @Model.Seller.SellerName</p> <!-- If you included seller info -->
+
+<a asp-action="AddToCart" asp-route-productId="@Model.ProductId" class="btn btn-success">Add to Cart</a>
+<a asp-action="ViewProducts" class="btn btn-primary">Back to Products</a>

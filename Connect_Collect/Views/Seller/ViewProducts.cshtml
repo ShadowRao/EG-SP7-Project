@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductViewModel>;
+﻿@model IEnumerable<ProductViewModel>
 
 @{
     ViewData["Title"] = "Products";
@@ -30,8 +30,8 @@
                     </div>
 
                     <div class="card-footer text-center">
-                        <a href="/Product/Details/@product.ProductId" class="btn btn-primary">View Details</a>
-                        <a href="/Cart/Add/@product.ProductId" class="btn btn-success">Add to Cart</a>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-primary">View Details</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" class="btn btn-success">Add to Cart</a>
                     </div>
                 </div>
             </div>

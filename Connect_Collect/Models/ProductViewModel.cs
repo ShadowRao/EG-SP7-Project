@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Connect_Collect.Models.Entities;
 
 namespace Connect_Collect.Models
 {
@@ -18,5 +19,7 @@ namespace Connect_Collect.Models
         public string? ImageUrl { get; set; }  // Store image URL or file path
 
         public int Price { get; set; }
+
+        public Seller Seller { get; set; }
     }
 }
