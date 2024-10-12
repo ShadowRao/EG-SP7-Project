@@ -4,6 +4,8 @@ using Connect_Collect.Data;
 using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,17 +22,20 @@ namespace Connect_Collect.Controllers
             _logger = logger;
             this.dbContext = dbContext;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult SignIn()
         {
             return View();
         }
 
+
+        [AllowAnonymous]
         [HttpGet]
         //Verifies login for customer while signing in
         public async Task<IActionResult> SignIn(SignInModel model)
@@ -68,7 +73,7 @@ namespace Connect_Collect.Controllers
                     var identity = new ClaimsIdentity(claims, "Customer");
                     var principal = new ClaimsPrincipal(identity);
 
-                    await HttpContext.SignInAsync(principal);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     Console.WriteLine("Customer logged in successfully.");
                     return RedirectToAction("Home", "Customer");
                 }
@@ -90,7 +95,7 @@ namespace Connect_Collect.Controllers
                     var identity = new ClaimsIdentity(claims, "Seller");
                     var principal = new ClaimsPrincipal(identity);
 
-                    await HttpContext.SignInAsync(principal);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     Console.WriteLine("Seller logged in successfully.");
                     return RedirectToAction("Home", "Seller");
                 }
@@ -108,7 +113,7 @@ namespace Connect_Collect.Controllers
                 var identity = new ClaimsIdentity(claims, "Admin");
                 var principal = new ClaimsPrincipal(identity);
 
-                await HttpContext.SignInAsync(principal);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 // Redirect to the desired page after successful login
                 return RedirectToAction("Home", "Admin"); 
@@ -119,6 +124,7 @@ namespace Connect_Collect.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
