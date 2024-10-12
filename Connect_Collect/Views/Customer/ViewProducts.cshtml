@@ -1,8 +1,10 @@
-﻿@{
+﻿@model IEnumerable<ProductViewModel>
+
+@{
     ViewData["Title"] = "Products";
 }
 <link rel="stylesheet" href="~/css/CommonStyle.css" />
-<h2 class="text-center">Available Products</h2>
+<h2 class="text-center">Available CHECK Products</h2>
 
 <div class="container">
     <div class="row">
@@ -10,7 +12,6 @@
         {
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100 card-hover">
-                    @* Add class 'card-hover' for the animation *@
                     @* Display product image if available *@
                     @if (!string.IsNullOrEmpty(product.ImageUrl))
                     {
@@ -18,27 +19,25 @@
                     }
                     else
                     {
-                        <img src="~/images/placeholder.png" class="card-img-top" alt="No Image" style="height: 200px; object-fit: cover;" />
+                        <img src="~/images/placeholder.jpg" class="card-img-top" alt="No Image" style="height: 200px; object-fit: cover;" />
                     }
 
                     <div class="card-body">
                         <h5 class="card-title">@product.ProductName</h5>
                         <p class="card-text">@product.ProductDescription</p>
-                        <p class="text-muted">Sold by: @product.SellerId</p>
+                        <p class="text-muted">Sold by: @product.Seller.SellerName</p> <!-- Show seller's name -->
                         <h6 class="text-primary">$@product.Price</h6>
                     </div>
 
                     <div class="card-footer text-center">
-                        <a href="/Product/Details/@product.ProductId" class="btn btn-primary">View Details</a>
-                        <a href="/Cart/Add/@product.ProductId" class="btn btn-success">Add to Cart</a>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-primary">View Details</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" >AdSSSSd to Cart</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-
-
 <style>
     .card-hover {
         transition: transform 0.3s ease-in-out;

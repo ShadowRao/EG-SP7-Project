@@ -1,0 +1,33 @@
+﻿@using Connect_Collect.Models.Entities
+@model IEnumerable<Connect_Collect.Models.Entities.Cart>
+
+@* @model IEnumerable<Cart> *@
+
+<h2>Your Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerId</td>
+                    <td>@item.ProductId</td>
+                    <td>@item.Product.ProductName</td> <!-- Accessing Product Name -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}

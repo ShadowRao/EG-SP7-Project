@@ -3,9 +3,12 @@ using Connect_Collect.Models.Entities;
 using Connect_Collect.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+
+using System.Threading.Tasks;
+using System.Linq;
+using System.IO;
 
 namespace Connect_Collect.Controllers
 {
@@ -14,7 +17,7 @@ namespace Connect_Collect.Controllers
         private readonly ApplicationDbContext dbContext;
 
         public SellerController(ApplicationDbContext dbContext)
-        {
+        {   
             this.dbContext = dbContext;
         }
 
@@ -33,11 +36,13 @@ namespace Connect_Collect.Controllers
             //var sellerdata = await dbContext.Seller.FindAsync(Id);
             return View(sellerdata);
         }
+
         [HttpGet]
         public IActionResult AddSeller()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddSeller(AddSellerViewModel viewModel)
         {
@@ -67,10 +72,8 @@ namespace Connect_Collect.Controllers
         {
             // Populate the seller list for the dropdown
             ViewBag.SellerList = new SelectList(dbContext.Seller, "SellerId", "SellerName");
-
             ViewBag.SellerId = id;
-            var seller = dbContext.Seller
-                .FirstOrDefault(s => s.SellerId == id);
+
             return View();
         }
 
@@ -100,36 +103,49 @@ namespace Connect_Collect.Controllers
                     ProductId = model.ProductId,
                     ProductName = model.ProductName,
                     SellerId = model.SellerId,
-                    ProductDescription = model.ProductDescription,  
+                    ProductDescription = model.ProductDescription,
                     ImageUrl = model.ImageUrl,
                     Price = model.Price,
-
                 };
                 // Add the model to the database
                 dbContext.Product.Add(product);
                 await dbContext.SaveChangesAsync();
 
                 return RedirectToAction("AddProduct");
-
             }
 
             return View(model);  // Handle case when no file is uploaded
         }
+        /*
+                [HttpGet]
+                public async Task<IActionResult> ViewOrders(Guid sellerId)
+                {
+                    // Fetch orders related to the seller's products
+                    var orders = await dbContext.Order
+                        .Where(o => o.Product.SellerId == sellerId) // Modified to check the Product's SellerId
+                        .Include(o => o.Customer) // Include related customer data
+                        .Include(o => o.Product)  // Include related product data
+                        .ToListAsync();
 
-        //Viewing orders from the seller dashboard
+                    return View(orders); // Pass the orders to the view
+                }*/
         [HttpGet]
         public async Task<IActionResult> ViewOrders(Guid id)
         {
-            // Fetch all orders related to the seller by SellerId
-            var orders = await dbContext.Order
-                .Where(o => o.SellerId == id)
-                .Include(o => o.Customer) // Optionally include related customer data
+            // Fetch all cart items related to the products that belong to the seller
+            var orders = await dbContext.Cart
+                .Include(c => c.Customer)  // Include related customer data
+                .Include(c => c.Product)   // Include related product data
+                .Where(c => c.Product.SellerId == id)  // Filter by the seller's products
                 .ToListAsync();
 
-            // Pass the list of orders to the view
-            return View(orders);
-        }
+            if (!orders.Any())
+            {
+                Console.WriteLine("No orders found for the seller");
+            }
 
+            return View(orders);  // Pass the cart items (orders) to the view
+        }
 
 
 
