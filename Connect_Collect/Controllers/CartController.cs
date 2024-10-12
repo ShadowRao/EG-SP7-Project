@@ -20,7 +20,7 @@ namespace Connect_Collect.Controllers
         public async Task<IActionResult> AddToCart(Guid productId)
         {
             // Hardcoded customer ID for testing
-            var customerId = Guid.Parse("77D5400E-1625-467E-9F7B-E1D65FFEC766");
+            var customerId = Guid.Parse("5A526B2B-07EE-4544-1159-08DCEAAF60BC");
 
             // Check if the product is already in the cart for the given customer
             var cartItem = await _context.Cart
@@ -55,7 +55,7 @@ namespace Connect_Collect.Controllers
         public async Task<IActionResult> CartContents()
         {
             // Hardcoded customer ID for testing
-            var customerId = "77D5400E-1625-467E-9F7B-E1D65FFEC766";
+            var customerId = "5A526B2B-07EE-4544-1159-08DCEAAF60BC";
 
             // Get cart items for the specific customer
             var cartItems = await _context.Cart
