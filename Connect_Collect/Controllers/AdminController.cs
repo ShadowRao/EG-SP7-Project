@@ -1,6 +1,7 @@
 ﻿using Connect_Collect.Data;
 using Connect_Collect.Models;
 using Connect_Collect.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,14 @@ namespace Connect_Collect.Controllers
             this.dbContext = dbContext;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult SignUp()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> SignUp(AdminViewModel viewModel)
         {

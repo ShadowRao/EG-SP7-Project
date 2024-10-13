@@ -51,7 +51,7 @@ namespace Connect_Collect.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddSeller(AddSellerViewModel viewModel)
         {
@@ -73,7 +73,8 @@ namespace Connect_Collect.Controllers
 
             ViewBag.SuccessMessage = "Successfully signed up. Please login.";
 
-            return RedirectToAction("SignIn", "Home");
+            return View();
+            //return RedirectToAction("SignIn", "Home");
         }
 
         [HttpGet]
