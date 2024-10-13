@@ -1,5 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
+
+<link rel="stylesheet" href="~/css/CommonStyle.css" />
+
+<div class="home-container">
+    <h1 class="display-4" style="font-size: 2.5rem;">You have already logged in!</h1>
+    <p>Click below to sign out!</p>
+    <li class="nav-item">
+        <a class="btn btn-signup" asp-area="" asp-controller="Home" asp-action="LogOut">Log Out</a>
+    </li>
+
+</div>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif; /* Simple, aesthetic font */
+        background-color: #E6E6FA; /* Soft lavender background */
+    }
+
+    .home-container {
+        max-width: 800px; /* Restrict width for better readability */
+        text-align: center;
+        padding: 20px;
+        margin: 100px auto 0; /* Move the content downwards (100px from the top) */
+        background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for aesthetics */
+    }
+
+    h1 {
+        font-family: 'Helvetica', sans-serif; /* Clean and aesthetic font */
+        font-size: 48px; /* Appropriately large for the main heading */
+        color: #4B0082; /* Indigo for contrast */
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px; /* Moderate font size for readability */
+        line-height: 1.6;
+        color: #2D1E3E; /* Dark purple text */
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #BA55D3; /* Light purple link */
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #8A2BE2; /* Darker purple on hover */
+            text-decoration: underline;
+        }
+</style>

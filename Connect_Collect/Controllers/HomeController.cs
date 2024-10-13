@@ -36,7 +36,7 @@ namespace Connect_Collect.Controllers
             if (isAuthenticated == true)
             {
                 //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                return RedirectToAction("Privacy", "Home");
+                return View("AlreadyLoggedIn");
             }
             return View();
         }
