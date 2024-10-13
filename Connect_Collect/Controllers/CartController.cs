@@ -3,6 +3,7 @@ using Connect_Collect.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Connect_Collect.Controllers
@@ -36,7 +37,7 @@ namespace Connect_Collect.Controllers
                 // If the product is not in the cart, create a new cart entry
                 cartItem = new Cart
                 {
-                    //CustomerId = customerId,
+                    CustomerId = Guid.Parse(customerId),
                     ProductId = productId,
                     Quantity = 1 // Set initial quantity to 1
                 };

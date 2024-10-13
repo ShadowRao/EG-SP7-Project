@@ -26,7 +26,13 @@ else
                     <td>@order.Customer.CustomerName</td> <!-- Displaying customer name -->
                     <td>@order.Product.ProductId</td>
                     <td>@order.Product.ProductName</td> <!-- Displaying product name -->
-              
+                    <td>
+                        <form method="post" action="@Url.Action("SendEmail", "Seller")">
+                            <input type="hidden" name="customerEmail" value="@order.Customer.Email" /> <!-- Include customer email -->
+                            <input type="hidden" name="productId" value="@order.ProductId" /> <!-- Include order ID if needed -->
+                            <button type="submit" class="btn btn-primary">Send Email</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>

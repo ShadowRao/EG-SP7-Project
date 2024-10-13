@@ -5,20 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
-
+using MailKit.Net.Smtp;
+using MimeKit;
 using System.Threading.Tasks;
 using System.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
+using System.Net;
 
 namespace Connect_Collect.Controllers
 {
     public class SellerController : Controller
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly EmailService _emailService;
 
-        public SellerController(ApplicationDbContext dbContext)
-        {   
+        public SellerController(ApplicationDbContext dbContext,EmailService emailService)
+        {
+            
+            _emailService = emailService;
             this.dbContext = dbContext;
         }
 
@@ -151,6 +157,18 @@ namespace Connect_Collect.Controllers
             }
 
             return View(orders);  // Pass the cart items (orders) to the view
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string customerEmail, Guid productId)
+        {
+            var productdata=await dbContext.Product.FindAsync(productId);
+            var sellerid = User.FindFirst("SellerId")?.Value;
+            var sellerdata = await dbContext.Seller.FindAsync(Guid.Parse(sellerid));
+            await _emailService.SendEmailAsync(customerEmail,"Hey "+ productdata.ProductName.ToString() +" is available" , "The product  "+ productdata.ProductName.ToString()+ " is ready to be sold by " + sellerdata.SellerName.ToString()+" \n You can contact them through "+sellerdata.Email.ToString());
+
+            // Redirect back to the ViewOrders page
+            return RedirectToAction("ViewOrders");
         }
 
 

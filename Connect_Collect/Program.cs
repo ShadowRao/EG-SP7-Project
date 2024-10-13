@@ -1,3 +1,4 @@
+using Connect_Collect.Controllers;
 using Connect_Collect.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +33,7 @@ public class Program
         });
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddAuthorization();
+        builder.Services.AddSingleton<EmailService>();
 
         // Add authentication services
 
@@ -45,6 +47,7 @@ public class Program
         app.UseStaticFiles();
         app.UseAuthentication(); // Use authentication
         app.UseAuthorization();
+        
 
         app.UseRouting();
 

@@ -44,7 +44,7 @@ namespace Connect_Collect.Controllers
             //var customerdata = await dbContext.Customer.FindAsync(Id);
             return View(customerdata);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddCustomer(AddCustomerViewModel viewModel)
         {
