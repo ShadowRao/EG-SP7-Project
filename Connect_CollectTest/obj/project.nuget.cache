@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "CT/lvx0/KzI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
+  "projectFilePath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shrao\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\shrao\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
