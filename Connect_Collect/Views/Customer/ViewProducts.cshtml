@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/Layout2.cshtml"; // Set global layout
 }
 <link rel="stylesheet" href="~/css/CommonStyle.css" />
-<h2 class="text-center">Available CHECK Products</h2>
+<h2 class="text-center">Available Products</h2>
 
 <div class="container">
     <div class="row">
@@ -13,7 +13,6 @@
         {
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100 card-hover">
-                    @* Display product image if available *@
                     @if (!string.IsNullOrEmpty(product.ImageUrl))
                     {
                         <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName" style="height: 200px; object-fit: cover;" />
@@ -25,32 +24,87 @@
 
                     <div class="card-body">
                         <h5 class="card-title">@product.ProductName</h5>
-                        <p class="card-text">@product.ProductDescription</p>
-                        <p class="text-muted">Sold by: @product.Seller.SellerName</p> <!-- Show seller's name -->
+                        <p class="text-muted">Sold by: @product.Seller.SellerName</p>
                         <h6 class="text-primary">$@product.Price</h6>
                     </div>
 
                     <div class="card-footer text-center">
-                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-primary">View Details</a>
-                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" >AdSSSSd to Cart</a>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"
+                           class="btn btn-primary"
+                           data-toggle="modal"
+                           data-target="#productModal"
+                           data-id="@product.ProductId"
+                           data-name="@product.ProductName"
+                           data-description="@product.ProductDescription"
+                           data-price="@product.Price"
+                           data-image-url="@product.ImageUrl">
+                            View Details
+                        </a>
+
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" class="btn btn-success">Add to Cart</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+<!-- Product Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Product Image" class="img-fluid mb-3" />
+                <h5 id="modalProductName"></h5>
+                <p id="modalProductDescription"></p>
+                <h6 class="text-primary" id="modalProductPrice"></h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .card-hover {
         transition: transform 0.3s ease-in-out;
     }
-
-        /* Scale the card up when hovered */
-        .card-hover:hover {
-            transform: translateY(-10px); /* Makes the card 'jump' up */
-        }
-
+    
+    .card-hover:hover {
+        transform: translateY(-10px);
+    }
+    
     .btn:hover {
-        transform: translateY(-5px); /* Move up slightly */
+        transform: translateY(-5px);
         transition: transform 0.3s ease-in-out;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    $('#productModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var productId = button.data('id'); // Extract info from data-* attributes
+        var productName = button.data('name');
+        var productDescription = button.data('description');
+        var productPrice = button.data('price');
+        var imageUrl = button.data('image-url');
+
+        // Update the modal's content.
+        var modal = $(this);
+        modal.find('#modalProductName').text(productName);
+        modal.find('#modalProductDescription').text(productDescription);
+        modal.find('#modalProductPrice').text('$' + productPrice);
+        modal.find('#modalImage').attr('src', imageUrl || '~/images/placeholder.jpg');
+    });
+
+</script>
