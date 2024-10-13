@@ -20,11 +20,11 @@ namespace Connect_Collect.Controllers
         public async Task<IActionResult> AddToCart(Guid productId)
         {
             // Hardcoded customer ID for testing
-            var customerId = Guid.Parse("5A526B2B-07EE-4544-1159-08DCEAAF60BC");
+            var customerId = User.FindFirst("CustomerId")?.Value;
 
             // Check if the product is already in the cart for the given customer
             var cartItem = await _context.Cart
-                .FirstOrDefaultAsync(c => c.CustomerId == customerId && c.ProductId == productId);
+                .FirstOrDefaultAsync(c => c.CustomerId.ToString() == customerId && c.ProductId == productId);
 
             if (cartItem != null)
             {
@@ -36,7 +36,7 @@ namespace Connect_Collect.Controllers
                 // If the product is not in the cart, create a new cart entry
                 cartItem = new Cart
                 {
-                    CustomerId = customerId,
+                    //CustomerId = customerId,
                     ProductId = productId,
                     Quantity = 1 // Set initial quantity to 1
                 };

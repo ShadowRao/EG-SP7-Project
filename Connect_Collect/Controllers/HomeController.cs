@@ -124,6 +124,13 @@ namespace Connect_Collect.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("SignIn");
+        }
+
         [AllowAnonymous]
         public IActionResult Privacy()
         {
