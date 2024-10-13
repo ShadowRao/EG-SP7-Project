@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Linq;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Connect_Collect.Controllers
 {
@@ -37,11 +38,13 @@ namespace Connect_Collect.Controllers
             return View(sellerdata);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult AddSeller()
         {
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddSeller(AddSellerViewModel viewModel)

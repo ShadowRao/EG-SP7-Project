@@ -29,14 +29,21 @@ namespace Connect_Collect.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult SignIn()
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated == true)
+            {
+                //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Privacy", "Home");
+            }
             return View();
         }
 
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         //Verifies login for customer while signing in
         public async Task<IActionResult> SignIn(SignInModel model)
         {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Connect_Collect.Controllers
 {
@@ -20,6 +21,7 @@ namespace Connect_Collect.Controllers
 
         public object Finish { get; private set; }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult AddCustomer()
         {

@@ -55,7 +55,7 @@ namespace Connect_Collect.Controllers
         public async Task<IActionResult> CartContents()
         {
             // Hardcoded customer ID for testing
-            var customerId = "5A526B2B-07EE-4544-1159-08DCEAAF60BC";
+            var customerId = User.FindFirst("CustomerId")?.Value;
 
             // Get cart items for the specific customer
             var cartItems = await _context.Cart
