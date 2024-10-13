@@ -40,97 +40,108 @@ namespace Connect_Collect.Controllers
         //Verifies login for customer while signing in
         public async Task<IActionResult> SignIn(SignInModel model)
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-                
-            // Verify email is valid of Customer
-            var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email);
 
-            // Verify email is valid of Seller
-            var SUser = dbContext.Seller.FirstOrDefault(u => u.Email == model.Email );
-
-            // Verify email is valid of Admin
-            var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email);
-
-
-            if (CUser != null)
+            if (isAuthenticated == true)
             {
-                var passwordHasher = new PasswordHasher<Customer>();
-                var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, model.Password);
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Privacy", "Home");
+            }
 
-                
+            else
+            {
 
-                if (result == PasswordVerificationResult.Success)
+                // Verify email is valid of Customer
+                var CUser = dbContext.Customer.FirstOrDefault(u => u.Email == model.Email);
+
+                // Verify email is valid of Seller
+                var SUser = dbContext.Seller.FirstOrDefault(u => u.Email == model.Email);
+
+                // Verify email is valid of Admin
+                var AUser = dbContext.Admin.FirstOrDefault(u => u.Email == model.Email);
+
+
+                if (CUser != null)
                 {
-                    var claims = new List<Claim>
+                    var passwordHasher = new PasswordHasher<Customer>();
+                    var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, model.Password);
+
+
+
+                    if (result == PasswordVerificationResult.Success)
+                    {
+                        var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, CUser.Email),
                         new Claim(ClaimTypes.Role, "Customer"),
                         new Claim("CustomerId", CUser.CustomerId.ToString()) // Store CustomerId as a claim
                     };
-                    var identity = new ClaimsIdentity(claims, "Customer");
-                    var principal = new ClaimsPrincipal(identity);
+                        var identity = new ClaimsIdentity(claims, "Customer");
+                        var principal = new ClaimsPrincipal(identity);
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    Console.WriteLine("Customer logged in successfully.");
-                    return RedirectToAction("Home", "Customer");
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                        Console.WriteLine("Customer logged in successfully.");
+                        return RedirectToAction("Home", "Customer");
+                    }
                 }
-            }
 
-            if (SUser != null)
-            {
-                var passwordHasher = new PasswordHasher<Seller>();
-                var result = passwordHasher.VerifyHashedPassword(SUser, SUser.Password, model.Password);
-
-                if (result == PasswordVerificationResult.Success)
+                if (SUser != null)
                 {
-                    var claims = new List<Claim>
+                    var passwordHasher = new PasswordHasher<Seller>();
+                    var result = passwordHasher.VerifyHashedPassword(SUser, SUser.Password, model.Password);
+
+                    if (result == PasswordVerificationResult.Success)
+                    {
+                        var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, SUser.Email),
                         new Claim(ClaimTypes.Role, "Seller"),
                         new Claim("SellerId", SUser.SellerId.ToString()) // Store CustomerId as a claim
                     };
-                    var identity = new ClaimsIdentity(claims, "Seller");
-                    var principal = new ClaimsPrincipal(identity);
+                        var identity = new ClaimsIdentity(claims, "Seller");
+                        var principal = new ClaimsPrincipal(identity);
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    Console.WriteLine("Seller logged in successfully.");
-                    return RedirectToAction("Home", "Seller");
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                        Console.WriteLine("Seller logged in successfully.");
+                        return RedirectToAction("Home", "Seller");
+                    }
+
                 }
-                
-            }
 
-            if (AUser != null)
-            {
-                var claims = new List<Claim>
+                if (AUser != null)
+                {
+                    var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, AUser.Email),
                     new Claim(ClaimTypes.Role, "Admin"),
                     new Claim("AdminId", AUser.AdminId.ToString()) // Store CustomerId as a claim
                 };
-                var identity = new ClaimsIdentity(claims, "Admin");
-                var principal = new ClaimsPrincipal(identity);
+                    var identity = new ClaimsIdentity(claims, "Admin");
+                    var principal = new ClaimsPrincipal(identity);
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                // Redirect to the desired page after successful login
-                return RedirectToAction("Home", "Admin"); 
+                    // Redirect to the desired page after successful login
+                    return RedirectToAction("Home", "Admin");
+                }
+
+                // Add an error message to the model state if login fails
+                ModelState.AddModelError("", "Invalid email or password.");
+                return View(model);
             }
-
-            // Add an error message to the model state if login fails
-            ModelState.AddModelError("", "Invalid email or password.");
-            return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("SignIn");
+            return RedirectToAction("SignIn", "Home");
         }
-
         [AllowAnonymous]
         public IActionResult Privacy()
         {
