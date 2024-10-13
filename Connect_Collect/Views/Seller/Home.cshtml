@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = "~/Views/Shared/Layout2.cshtml"; // Set global layout
+    Layout = "~/Views/Shared/LayoutSeller.cshtml"; // Set global layout
 }
 
 
@@ -22,18 +22,11 @@
 
 
 
-@* <div class="mt-4">
-    <h3>Products</h3>
-    <p>Sell products here!</p>
-    <a asp-action="AddProduct" asp-route-id="@Model.SellerId" class="btn btn-success">Add Products</a>
-    <a asp-action="ViewOrders" asp-route-id="@Model.SellerId" class="btn btn-view-orders">View Orders</a>
-
-</div> *@
 <div class="mt-4">
     <h3>Products</h3>
     <p>Sell products here!</p>
-    <a asp-action="AddProduct" asp-route-id="@Model.SellerId" class="btn btn-add-products">Add Products</a>
-    <a asp-action="ViewOrders" asp-route-id="@Model.SellerId" class="btn btn-view-orders">View Orders</a>
+    <a asp-action="AddProduct"  class="btn btn-add-products">Add Products</a>
+    <a asp-action="ViewOrders"  class="btn btn-view-orders">View Orders</a>
 </div>
 
 

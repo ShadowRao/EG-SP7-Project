@@ -1,8 +1,8 @@
 ﻿@using Connect_Collect.Models.Entities
 @model IEnumerable<Connect_Collect.Models.Entities.Cart>
 
-@{
-    Layout = "~/Views/Shared/Layout2.cshtml"; // Set global layout
+    @{
+    Layout = "~/Views/Shared/LayoutCustomer.cshtml"; // Set global layout
 }
 @* @model IEnumerable<Cart> *@
 
@@ -17,18 +17,18 @@ else
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Customer ID</th>
-                <th>Product ID</th>
+                <th>SellerName</th>
                 <th>Product Name</th>
+                <th>Product Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.CustomerId</td>
-                    <td>@item.ProductId</td>
+                    <td>@item.Product.Seller.SellerName</td>
                     <td>@item.Product.ProductName</td> <!-- Accessing Product Name -->
+                    <td>@item.Product.Price</td>
                 </tr>
             }
         </tbody>

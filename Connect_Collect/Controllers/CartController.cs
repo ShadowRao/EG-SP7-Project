@@ -60,6 +60,7 @@ namespace Connect_Collect.Controllers
             // Get cart items for the specific customer
             var cartItems = await _context.Cart
                 .Include(c => c.Product) // Include related product data
+                .ThenInclude(p=>p.Seller)
                 .Where(c => c.CustomerId == Guid.Parse(customerId))
                 .ToListAsync();
 

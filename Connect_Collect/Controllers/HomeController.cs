@@ -35,7 +35,6 @@ namespace Connect_Collect.Controllers
             var isAuthenticated = User.Identity.IsAuthenticated;
             if (isAuthenticated == true)
             {
-                //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 return View("AlreadyLoggedIn");
             }
             return View();

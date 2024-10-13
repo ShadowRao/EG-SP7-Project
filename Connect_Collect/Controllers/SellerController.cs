@@ -71,11 +71,13 @@ namespace Connect_Collect.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddProduct(Guid id)
+        public IActionResult AddProduct()
         {
+            var sellerIdClaim = User.FindFirst("SellerId")?.Value;
+            var sellerId = Guid.Parse(sellerIdClaim);
             // Populate the seller list for the dropdown
             ViewBag.SellerList = new SelectList(dbContext.Seller, "SellerId", "SellerName");
-            ViewBag.SellerId = id;
+            ViewBag.SellerId = sellerId;
 
             return View();
         }
@@ -133,13 +135,14 @@ namespace Connect_Collect.Controllers
                     return View(orders); // Pass the orders to the view
                 }*/
         [HttpGet]
-        public async Task<IActionResult> ViewOrders(Guid id)
+        public async Task<IActionResult> ViewOrders()
         {
+            var sellerId = User.FindFirst("SellerId")?.Value;
             // Fetch all cart items related to the products that belong to the seller
             var orders = await dbContext.Cart
                 .Include(c => c.Customer)  // Include related customer data
                 .Include(c => c.Product)   // Include related product data
-                .Where(c => c.Product.SellerId == id)  // Filter by the seller's products
+                .Where(c => c.Product.SellerId.ToString() == sellerId)  // Filter by the seller's products
                 .ToListAsync();
 
             if (!orders.Any())

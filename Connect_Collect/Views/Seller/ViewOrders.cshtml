@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Connect_Collect.Models.Entities.Cart>
 @{
-    Layout = "~/Views/Shared/Layout2.cshtml"; // Set global layout
+    Layout = "~/Views/Shared/LayoutSeller.cshtml"; // Set global layout
 }
 
 <h2>Orders for Your Products</h2>
@@ -14,7 +14,6 @@ else
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Customer ID</th>
                 <th>Customer Name</th>
                 <th>Product ID</th>
                 <th>Product Name</th>
@@ -24,7 +23,6 @@ else
             @foreach (var order in Model)
             {
                 <tr>
-                    <td>@order.Customer.CustomerId</td>
                     <td>@order.Customer.CustomerName</td> <!-- Displaying customer name -->
                     <td>@order.Product.ProductId</td>
                     <td>@order.Product.ProductName</td> <!-- Displaying product name -->

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Connect_Collect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0ecde91df630504b3f22ea7799de3b499299434")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc002ee8c3174506bb7b4bf17477a0786efe4d2c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Connect_Collect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Connect_Collect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
