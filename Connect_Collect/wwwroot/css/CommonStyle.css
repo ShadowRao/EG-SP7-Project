@@ -1,18 +1,5 @@
 ﻿/* General page styling */
-/*body {
-    background-image: url("/images/bg.gif");
-    background-size: cover;*/ /* Ensure the GIF covers the entire background */
-    /*background-repeat: no-repeat;*/ /* Prevent the GIF from repeating */
-    /*background-position: center;*/ /* Center the GIF */
-    /*height: 140vh;*/ /* Set the body to take up the full height of the viewport */
-    /*margin: 0;
-    padding: 0;
-    color: #2D1E3E;*/ /* Dark purple text */
-    /*font-family: 'Arial', sans-serif;*/
 
-    /*background-color: #E6E6FA;  Lavender background */
-/*}*/
-/*Privacy, home, sign up and sign pages' background (gif) */
 .default-background {
     background-image: url("/images/stationarybg.png");
     background-size: cover;
@@ -69,7 +56,7 @@ a button {
 input.form-control {
     border: 2px solid #9370DB; /* Light purple outline for textboxes */
     border-radius: 5px;
-    padding: 10px;
+    padding: 3px;
     box-shadow: none;
     background-color: #F8F8FF; /* GhostWhite background for input fields */
     color: #2D1E3E; /* Text inside input fields */
@@ -242,6 +229,25 @@ footer {
         background-color: #8A2BE2; /* Darker red on hover */
         color: white;
     }
+
+/* Light purple button */
+button.btn-secondary {
+    background-color: #BA55D3; /* Light purple */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    /* Darker purple on hover */
+    button.btn-secondary:hover,
+    button.btn-secondary:active {
+        background-color: #9f4cb3; /* Slightly darker purple */
+    }
+
 /*.form-control {
     transition: box-shadow 0.3s ease, border-color 0.3s ease;*/ /* Smooth transition */
 /*}*/
@@ -258,10 +264,11 @@ footer {
     transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
  /*Seller Dahsboard Buttons*/
+/* Light pink button */
 .btn-view-orders {
-    background-color: #4B0082; /* Indigo */
+    background-color: #BA55D3; /* Light pink */
     border: none;
-    color: #483D8B;
+    color: white;
     padding: 10px 20px;
     font-size: 14px;
     cursor: pointer;
@@ -269,9 +276,29 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-.btn-view-orders:hover {
-    background-color: #483D8B; /* Darker indigo/blue on hover */
+    /* Slightly darker purple on hover */
+    .btn-view-orders:hover,
+    .btn-view-orders:active {
+        background-color: #8A2BE2; /* Slightly darker purple */
+    }
+
+    /*Add Product button*/
+.btn-add-products {
+    background-color: #BA55D3; /* Light pink */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+
+    /* Slightly darker purple on hover */
+    .btn-add-products:hover,
+    .btn-add-products:active {
+        background-color: #8A2BE2; /* Slightly darker purple */
+    }
 
 
 
