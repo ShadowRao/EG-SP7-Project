@@ -36,7 +36,7 @@ namespace Connect_Collect.Controllers
                 // If the product is not in the cart, create a new cart entry
                 cartItem = new Cart
                 {
-                    //CustomerId = customerId,
+                    CustomerId = Guid.Parse(customerId),
                     ProductId = productId,
                     Quantity = 1 // Set initial quantity to 1
                 };

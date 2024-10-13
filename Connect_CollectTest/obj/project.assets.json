@@ -6032,19 +6032,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shrao\\.nuget\\packages\\": {}
+    "C:\\Users\\sugow\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
+      "projectUniqueName": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
       "projectName": "Connect_CollectTest",
-      "projectPath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
-      "packagesPath": "C:\\Users\\shrao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\obj\\",
+      "projectPath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\Connect_CollectTest.csproj",
+      "packagesPath": "C:\\Users\\sugow\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_CollectTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shrao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sugow\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6059,8 +6059,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj": {
-              "projectPath": "C:\\Users\\shrao\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj"
+            "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj": {
+              "projectPath": "C:\\Users\\sugow\\source\\repos\\EG-SP7-Project\\Connect_Collect\\Connect_Collect.csproj"
             }
           }
         }

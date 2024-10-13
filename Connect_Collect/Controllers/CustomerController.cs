@@ -45,6 +45,7 @@ namespace Connect_Collect.Controllers
             return View(customerdata);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddCustomer(AddCustomerViewModel viewModel)
         {
@@ -61,6 +62,8 @@ namespace Connect_Collect.Controllers
                 Address = viewModel.Address,
                 Contact = viewModel.Contact,
             };
+
+            
 
             await dbContext.Customer.AddAsync(customer);
             await dbContext.SaveChangesAsync();
