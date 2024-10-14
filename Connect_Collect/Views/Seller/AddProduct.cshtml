@@ -52,3 +52,14 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<script>
+    // Show alert if the product was successfully added
+    window.addEventListener('load', function () {
+        var successMessage = '@(TempData["SuccessMessage"] ?? "")';
+
+        if (successMessage && successMessage.length > 0) {
+            alert("Product added successfully on localhost.");
+        }
+    });
+</script>

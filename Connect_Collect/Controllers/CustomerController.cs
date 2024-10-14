@@ -67,9 +67,9 @@ namespace Connect_Collect.Controllers
 
             await dbContext.Customer.AddAsync(customer);
             await dbContext.SaveChangesAsync();
-            ViewBag.SuccessMessage = "Successfully signed up. Please login.";
-            return View();
-            //return RedirectToAction("SignIn", "Home");
+            TempData["SuccessMessage"] = "Successfully signed up. Please login.";
+            //return View();
+            return RedirectToAction("AddCustomer");
         }
 
         public IActionResult ViewProducts()

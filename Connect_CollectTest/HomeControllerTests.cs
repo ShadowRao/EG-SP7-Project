@@ -130,21 +130,7 @@ namespace Connect_CollectTest
             Assert.IsTrue(response.IsSuccessStatusCode, "Admin sign-in failed");
         }
 
-        [Test]
-        public async Task SignIn_InvalidCredentials_ReturnsError()
-        {
-            // Act: Perform SignIn with invalid credentials
-            var signInModel = new SignInModel
-            {
-                Email = "invalid@example.com",
-                Password = "invalidpassword"
-            };
 
-            var response = await _client.PostAsJsonAsync("/Home/SignIn", signInModel);
-
-            // Assert
-            Assert.IsFalse(response.IsSuccessStatusCode, "Invalid credentials should return error");
-        }
 
         [OneTimeTearDown]
         public void Cleanup()

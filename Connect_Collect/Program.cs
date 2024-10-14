@@ -2,6 +2,7 @@ using Connect_Collect.Controllers;
 using Connect_Collect.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,6 @@ public class Program
 
 
         var builder = WebApplication.CreateBuilder(args);
-
         // Add services to the container.
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
@@ -59,4 +59,7 @@ public class Program
 
         app.Run();
     }
+
+
+
 }

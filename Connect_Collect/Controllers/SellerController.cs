@@ -63,7 +63,7 @@ namespace Connect_Collect.Controllers
                 SellerName = viewModel.SellerName,
                 SellerId = viewModel.SellerId,
                 Email = viewModel.Email,
-                // Hash the password before saving it to the database
+                // Hashing the password before saving it to the database
                 Password = passwordHasher.HashPassword(null, viewModel.Password),
                 Contact = viewModel.Contact,
             };
@@ -71,10 +71,10 @@ namespace Connect_Collect.Controllers
             await dbContext.Seller.AddAsync(seller);
             await dbContext.SaveChangesAsync();
 
-            ViewBag.SuccessMessage = "Successfully signed up. Please login.";
+            TempData["SuccessMessage"] = "Successfully signed up. Please login.";
 
-            return View();
-            //return RedirectToAction("SignIn", "Home");
+            //return View();
+            return RedirectToAction("AddSeller");
         }
 
         [HttpGet]
@@ -87,6 +87,7 @@ namespace Connect_Collect.Controllers
             ViewBag.SellerId = sellerId;
 
             return View();
+            //return RedirectToAction("AddProduct");
         }
 
         [HttpPost]
@@ -123,24 +124,14 @@ namespace Connect_Collect.Controllers
                 dbContext.Product.Add(product);
                 await dbContext.SaveChangesAsync();
 
+                TempData["SuccessMessage"] = "Product added successfully!";
+
                 return RedirectToAction("AddProduct");
             }
 
             return View(model);  // Handle case when no file is uploaded
         }
-        /*
-                [HttpGet]
-                public async Task<IActionResult> ViewOrders(Guid sellerId)
-                {
-                    // Fetch orders related to the seller's products
-                    var orders = await dbContext.Order
-                        .Where(o => o.Product.SellerId == sellerId) // Modified to check the Product's SellerId
-                        .Include(o => o.Customer) // Include related customer data
-                        .Include(o => o.Product)  // Include related product data
-                        .ToListAsync();
 
-                    return View(orders); // Pass the orders to the view
-                }*/
         [HttpGet]
         public async Task<IActionResult> ViewOrders()
         {
