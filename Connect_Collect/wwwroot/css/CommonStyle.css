@@ -325,3 +325,300 @@ button.btn-secondary {
     backdrop-filter: blur(10px); /* Optional: adds a blur effect */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Optional: adds a subtle border */
 }
+
+/* Container for the entire dashboard */
+.dashboard-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for better aesthetics */
+}
+
+/* Section styling for dashboard */
+.dashboard-section, .profile-section, .products-section {
+    padding: 15px;
+    background-color: rgba(245, 245, 255, 0.9); /* Slightly lighter background for sections */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
+}
+
+/* Headings within the dashboard */
+.dashboard-container h1 {
+    color: #4B0082; /* Indigo color for main heading */
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.dashboard-container h2, .dashboard-container h3 {
+    color: #8A2BE2; /* Darker purple for section headings */
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* Styling for product and order buttons */
+.btn-add-products, .btn-view-orders {
+    display: inline-block;
+    background-color: #BA55D3; /* Light purple */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+    .btn-add-products:hover, .btn-view-orders:hover {
+        background-color: #8A2BE2; /* Darker purple on hover */
+    }
+
+/* Additional styling for profile info */
+.profile-section p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+/* Container for the orders section */
+.orders-container {
+    max-width: 900px; /* Limit the width for better readability */
+    margin: 50px auto; /* Center the container */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Table styling */
+.table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Remove space between borders */
+}
+
+    .table th, .table td {
+        padding: 12px; /* Padding for cells */
+        text-align: left; /* Align text to the left */
+    }
+
+    .table thead {
+        background-color: #BA55D3; /* Header background color */
+        color: white; /* White text for the header */
+    }
+
+    .table tbody tr {
+        background-color: #F8F8FF; /* Light background for rows */
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+    }
+
+        .table tbody tr:hover {
+            background-color: #E6E6FA; /* Light lavender on hover */
+        }
+
+
+/* General container styling */
+.container {
+    margin-top: 40px; /* Add top margin for spacing */
+}
+
+/* Card styling */
+.product-card {
+    transition: transform 0.3s ease; /* Smooth transform on hover */
+    border: 1px solid #BA55D3; /* Light purple border */
+    border-radius: 10px; /* Rounded corners */
+}
+
+    .product-card:hover {
+        transform: scale(1.05); /* Slightly scale up on hover */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    }
+
+/* Image styling */
+.card-img-top {
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Cover the card area */
+    border-top-left-radius: 10px; /* Round the top corners */
+    border-top-right-radius: 10px; /* Round the top corners */
+}
+
+/* Card body text styling */
+.card-body {
+    text-align: left; /* Align text to the left */
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #BA55D3; /* Light purple */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #8A2BE2; /* Darker purple on hover */
+    }
+
+.btn-success {
+    background-color: #28a745; /* Green for success */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-success:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+/* Styling for the Send Email button */
+.btn-primary {
+    background-color: #BA55D3; /* Light purple */
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #8A2BE2; /* Darker purple on hover */
+    }
+
+/* Center the no orders message */
+.orders-container p {
+    text-align: center;
+    font-size: 1.2rem; /* Slightly larger font size */
+    color: #2D1E3E; /* Dark purple for text */
+}
+
+
+.profile-section strong {
+    color: #4B0082; /* Indigo for profile labels */
+}
+
+/* Styling for logout button (commented out in view) */
+.btn-danger-custom {
+    background-color: #9370DB; /* Light purple */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-danger-custom:hover {
+        background-color: #8A2BE2; /* Darker purple on hover */
+    }
+
+
+/* General container styling */
+.container {
+    margin-top: 40px; /* Add top margin for spacing */
+}
+
+/* Dashboard section styling */
+.dashboard-section {
+    border: 1px solid #e0e0e0; /* Light grey border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for inner spacing */
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #333; /* Dark grey color for text */
+}
+
+/* Button styling */
+.btn-secondary {
+    background-color: #6c757d; /* Grey background for secondary button */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268; /* Darker grey on hover */
+    }
+
+.btn-success {
+    background-color: #28a745; /* Green for success */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-success:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+.btn-primary {
+    background-color: #007bff; /* Blue for primary button */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+/* Common style adjustments for tables */
+.table {
+    border-collapse: collapse; /* Ensure no gaps between borders */
+    width: 100%; /* Full width of container */
+}
+
+/* Button adjustments */
+.btn {
+    padding: 10px 15px; /* Add some padding for a better button look */
+    font-size: 14px; /* Adjust font size */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto; /* Enable horizontal scrolling */
+    }
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red for danger */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+
+/* List group item styling */
+.list-group-item {
+    border: none; /* Remove default border */
+    background-color: #f8f9fa; /* Light grey background for list items */
+}

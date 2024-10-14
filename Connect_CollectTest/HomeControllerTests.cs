@@ -105,7 +105,7 @@ namespace Connect_CollectTest
             var signInModel = new SignInModel
             {
                 Email = "testseller@example.com",
-                Password = "sellerpassword"
+                Password = "sellerpassword1"
             };
 
             var response = await _client.PostAsJsonAsync("/Home/SignIn", signInModel);

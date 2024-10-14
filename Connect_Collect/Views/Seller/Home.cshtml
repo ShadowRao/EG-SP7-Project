@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/LayoutSeller.cshtml"; // Set global layout
 }
 
+<div class="dashboard-container">
+    <h1>Welcome, @Model.SellerName!</h1>
 
-<h1>Welcome, @Model.SellerName!</h1>
+    <div class="dashboard-section mt-4">
+        <h2>Your Dashboard</h2>
+        <p>Here you can manage your profile, view your orders, and explore our products.</p>
+    </div>
 
-<div class="mt-4">
-    <h2>Your Dashboard</h2>
-    <p>Here you can manage your profile, view your orders, and explore our products.</p>
+    <div class="profile-section mt-4">
+        <h3>Your Profile</h3>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Seller ID:</strong> @Model.SellerId</p>
+        @* <a asp-action="EditProfile" class="btn btn-secondary">Edit Profile</a> *@
+    </div>
+
+    <div class="products-section mt-4">
+        <h3>Products</h3>
+        <p>Manage your products here!</p>
+        <a asp-action="AddProduct" class="btn btn-add-products">Add Products</a>
+        <a asp-action="ViewOrders" class="btn btn-view-orders">View Orders</a>
+    </div>
+
+    @*
+    <div class="logout-section mt-4">
+    <a asp-action="Logout" class="btn btn-danger-custom">Logout</a>
+    </div>
+    *@
 </div>
-
-<div class="mt-4">
-    <h3>Your Profile</h3>
-    <p>Email: @Model.Email</p>
-    <p>Seller ID: @Model.SellerId</p>
-    @* <a asp-action="EditProfile" class="btn btn-secondary">Edit Profile</a> *@
-</div>
-
-
-
-<div class="mt-4">
-    <h3>Products</h3>
-    <p>Sell products here!</p>
-    <a asp-action="AddProduct"  class="btn btn-add-products">Add Products</a>
-    <a asp-action="ViewOrders"  class="btn btn-view-orders">View Orders</a>
-</div>
-
-
-@* <div class="mt-4"
-    <a asp-action="Logout" class="btn btn-danger">Logout</a>
-</div> *@

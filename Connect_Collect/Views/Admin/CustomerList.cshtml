@@ -3,19 +3,18 @@
 *@
 
 @{
-    ViewData["Title"] = "List of customers";
-
+    ViewData["Title"] = "List of Customers";
 }
 <link rel="stylesheet" href="~/css/CommonStyle.css" />
-<div class="home-container">
-    <h1>Customer Table</h1>
+<div class="container mt-4">
+    <h1 class="text-center">Customer Table</h1>
     <div class="table-responsive">
         <!-- Make the table responsive -->
-        <table class="table">
-            <thead>
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="thead-dark">
                 <tr>
-                    <th>CustomerId</th>
-                    <th>CustomerName</th>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
                     <th>Email</th>
                     <th>Password</th>
                     <th>Address</th>
@@ -32,9 +31,7 @@
                         <td>@customer.Password</td>
                         <td>@customer.Address</td>
                         <td>
-                            <a asp-controller="Admin" asp-action="CustomerEdit" asp-route-id="@customer.CustomerId">
-                                <button type="button">Edit</button>
-                            </a>
+                            <a asp-controller="Admin" asp-action="CustomerEdit" asp-route-id="@customer.CustomerId" class="btn btn-warning btn-sm">Edit</a>
                         </td>
                     </tr>
                 }

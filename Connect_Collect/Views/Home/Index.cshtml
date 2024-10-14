@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="~/css/CommonStyle.css" />
 
 <div class="home-container">
-    <h1 class="display-4" style="font-size: 2.5rem;">Welcome to Connect & Collect !</h1>
+    <h1 class="display-4">Welcome to Connect & Collect!</h1>
     <p>We are EG's Internal Flea Market & Community Hub—your one-stop platform for everything from decluttering to settling into a new city! Here at EG, we're not just pioneers in Nordic vertical software; we’re all about building connections too. Whether you're looking to sell your gadgets, lease your apartment, or lend a hand to a newcomer finding their way around, this is the place for you! Think of it as EG’s own little OLX, where colleagues help colleagues, making relocations, sales, and city life that much easier. Happy browsing and connecting!</p>
     @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
 </div>
@@ -14,27 +14,29 @@
     body {
         font-family: 'Times New Roman', Times, serif, sans-serif; /* Simple, aesthetic font */
         background-color: #E6E6FA; /* Soft lavender background */
+        margin: 0; /* Reset default margin */
+        padding: 0; /* Reset default padding */
     }
 
     .home-container {
         max-width: 800px; /* Restrict width for better readability */
         text-align: center;
         padding: 20px;
-        margin: 100px auto 0; /* Move the content downwards (100px from the top) */
-        background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
+        margin: 100px auto; /* Center the container */
+        background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque background */
         border-radius: 10px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for aesthetics */
     }
 
     h1 {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif; /* Clean and aesthetic font */
-        font-size: 48px; /* Appropriately large for the main heading */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean and aesthetic font */
+        font-size: 2.5rem; /* Using rem for responsiveness */
         color: #4B0082; /* Indigo for contrast */
         margin-bottom: 20px;
     }
 
     p {
-        font-size: 18px; /* Moderate font size for readability */
+        font-size: 1rem; /* Moderate font size for readability */
         line-height: 1.6;
         color: #2D1E3E; /* Dark purple text */
         margin-bottom: 20px;

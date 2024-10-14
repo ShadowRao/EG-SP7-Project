@@ -4,6 +4,7 @@
     ViewData["Title"] = "Products";
     Layout = "~/Views/Shared/LayoutCustomer.cshtml"; // Set global layout
 }
+
 <link rel="stylesheet" href="~/css/CommonStyle.css" />
 <h2 class="text-center">Available Products</h2>
 
@@ -13,14 +14,10 @@
         {
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100 card-hover">
-                    @if (!string.IsNullOrEmpty(product.ImageUrl))
-                    {
-                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName" style="height: 200px; object-fit: cover;" />
-                    }
-                    else
-                    {
-                        <img src="~/images/placeholder.jpg" class="card-img-top" alt="No Image" style="height: 200px; object-fit: cover;" />
-                    }
+                    <img src="@(!string.IsNullOrEmpty(product.ImageUrl) ? product.ImageUrl : Url.Content("~/images/placeholder.jpg"))"
+                         class="card-img-top"
+                         alt="@(!string.IsNullOrEmpty(product.ImageUrl) ? product.ProductName : "No Image")"
+                         style="height: 200px; object-fit: cover;" />
 
                     <div class="card-body">
                         <h5 class="card-title">@product.ProductName</h5>
@@ -29,19 +26,18 @@
                     </div>
 
                     <div class="card-footer text-center">
-                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"
-                           class="btn btn-primary"
-                           data-toggle="modal"
-                           data-target="#productModal"
-                           data-id="@product.ProductId"
-                           data-name="@product.ProductName"
-                           data-description="@product.ProductDescription"
-                           data-price="@product.Price"
-                           data-image-url="@product.ImageUrl">
+                        <button class="btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#productModal"
+                                data-id="@product.ProductId"
+                                data-name="@product.ProductName"
+                                data-description="@product.ProductDescription"
+                                data-price="@product.Price"
+                                data-image-url="@product.ImageUrl">
                             View Details
-                        </a>
+                        </button>
 
-                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" class="btn btn-success">Send request</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" class="btn btn-success">Send Request</a>
                     </div>
                 </div>
             </div>
@@ -76,19 +72,19 @@
     .card-hover {
         transition: transform 0.3s ease-in-out;
     }
-    
-    .card-hover:hover {
-        transform: translateY(-10px);
-    }
-    
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+        }
+
     .btn:hover {
         transform: translateY(-5px);
         transition: transform 0.3s ease-in-out;
     }
 </style>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 
 <script>
     $('#productModal').on('show.bs.modal', function (event) {
@@ -106,5 +102,4 @@
         modal.find('#modalProductPrice').text('$' + productPrice);
         modal.find('#modalImage').attr('src', imageUrl || '~/images/placeholder.jpg');
     });
-
 </script>

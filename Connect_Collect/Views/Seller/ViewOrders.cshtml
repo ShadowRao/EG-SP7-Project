@@ -3,38 +3,41 @@
     Layout = "~/Views/Shared/LayoutSeller.cshtml"; // Set global layout
 }
 
-<h2>Orders for Your Products</h2>
+<div class="orders-container">
+    <h2>Orders for Your Products</h2>
 
-@if (!Model.Any())
-{
-    <p>No orders have been received for your products yet.</p>
-}
-else
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Customer Name</th>
-                <th>Product ID</th>
-                <th>Product Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model)
-            {
+    @if (!Model.Any())
+    {
+        <p>No orders have been received for your products yet.</p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@order.Customer.CustomerName</td> <!-- Displaying customer name -->
-                    <td>@order.Product.ProductId</td>
-                    <td>@order.Product.ProductName</td> <!-- Displaying product name -->
-                    <td>
-                        <form method="post" action="@Url.Action("SendEmail", "Seller")">
-                            <input type="hidden" name="customerEmail" value="@order.Customer.Email" /> <!-- Include customer email -->
-                            <input type="hidden" name="productId" value="@order.ProductId" /> <!-- Include order ID if needed -->
-                            <button type="submit" class="btn btn-primary">Send Email</button>
-                        </form>
-                    </td>
+                    <th>Customer Name</th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Customer.CustomerName</td> <!-- Displaying customer name -->
+                        <td>@order.Product.ProductId</td>
+                        <td>@order.Product.ProductName</td> <!-- Displaying product name -->
+                        <td>
+                            <form method="post" action="@Url.Action("SendEmail", "Seller")" class="email-form">
+                                <input type="hidden" name="customerEmail" value="@order.Customer.Email" /> <!-- Include customer email -->
+                                <input type="hidden" name="productId" value="@order.ProductId" /> <!-- Include product ID if needed -->
+                                <button type="submit" class="btn btn-primary">Send Email</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

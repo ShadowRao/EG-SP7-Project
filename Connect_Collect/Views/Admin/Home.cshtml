@@ -1,25 +1,97 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @{
     Layout = "~/Views/Shared/Layout2.cshtml"; // Set global layout
 }
 
-<h1>Welcome, @Model.AdminName!</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Welcome, @Model.AdminName!</h1>
 
-<div class="mt-4">
-    <h2>Administrator Dashboard</h2>
-    <p>Manage all sellers and customers from here. Use the options below to view, edit, or remove any entries in the system.</p>
+    <div class="text-center mb-5">
+        <h2 class="dashboard-title">Administrator Dashboard</h2>
+        <p class="lead"><center>Manage all sellers and customers from here. Use the options below to view, edit, or remove any entries in the system.</center></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-light">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Seller Management</h3>
+                    <p class="card-text">View and manage all registered sellers. You can add new sellers or update existing seller information.</p>
+                    <a asp-action="SellerList" class="btn btn-primary btn-lg">View Sellers</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-light">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Customer Management</h3>
+                    <p class="card-text">Manage customer accounts easily. View details, add new customers, or modify existing records.</p>
+                    <a asp-action="CustomerList" class="btn btn-primary btn-lg">View Customers</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="mt-4">
-    <h3>Seller Management</h3>
-    <p>Click the button below to view and manage all registered sellers. You can add new sellers or update seller information as needed.</p>
-    <a asp-action="SellerList" class="btn btn-success">View Sellers</a>
-</div>
+<style>
+    /* Custom styles for the admin dashboard */
+    body {
+        background-color: #f8f9fa; /* Light background for better contrast */
+    }
 
-<div class="mt-4">
-    <h3>Customer Management</h3>
-    <p>Click the button below to manage customer accounts. You can view customer details, add new customers, or make changes to existing records.</p>
-    <a asp-action="CustomerList" class="btn btn-success">View Customers</a>
-</div>
+    h1 {
+        color: #343a40; /* Darker color for the main header */
+    }
+
+    .dashboard-title {
+        color: #007bff; /* Bootstrap primary color for the dashboard title */
+        font-weight: 600; /* Semi-bold for better visibility */
+        margin-bottom: 10px; /* Margin for spacing */
+    }
+
+    .lead {
+        font-size: 1.1rem; /* Slightly larger font size for lead text */
+        font-weight: 300; /* Light font weight */
+        color: #6c757d; /* Medium gray for better readability */
+    }
+
+    .card {
+        border-radius: 1rem; /* Rounded corners for cards */
+        background-color: #ffffff; /* White background for cards */
+    }
+
+    .card-title {
+        font-size: 1.5rem; /* Larger font for card titles */
+        color: #343a40; /* Dark color for card titles */
+        margin-bottom: 10px; /* Spacing below title */
+    }
+
+    .card-text {
+        font-size: 1rem; /* Standard font size for card text */
+        color: #495057; /* Dark gray for better readability */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Increased padding for buttons */
+        font-size: 1rem; /* Standard font size for buttons */
+        border-radius: 0.5rem; /* Rounded corners for buttons */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Bootstrap primary color */
+        border: none; /* No border */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+    /* Responsive adjustments */
+    
+</style>

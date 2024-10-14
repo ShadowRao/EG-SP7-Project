@@ -9,41 +9,39 @@
 <div class="container mt-5">
     <h2 class="text-center">@ViewData["Title"]</h2>
 
-    <form asp-action="AddProduct" method="post" enctype="multipart/form-data">  
+    <form asp-action="AddProduct" method="post" enctype="multipart/form-data" class="product-upload-form">
         <div class="form-group">
             <label asp-for="ProductName" class="control-label">Product Name</label>
-            <input asp-for="ProductName" class="form-control" />
+            <input asp-for="ProductName" class="form-control" placeholder="Enter product name" required />
             <span asp-validation-for="ProductName" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">
-            @* <label asp-for="SellerId" class="control-label">Seller</label> *@
-            @* <select asp-for="SellerId" class="form-control" asp-items="ViewBag.SellerList"></select> *@
             <input type="hidden" name="SellerId" value="@ViewBag.SellerId" />
-
             <span asp-validation-for="SellerId" class="text-danger"></span>
         </div>
 
-
         <div class="form-group mt-3">
             <label asp-for="ProductDescription" class="control-label">Product Description</label>
-            <textarea asp-for="ProductDescription" class="form-control" rows="5"></textarea>
+            <textarea asp-for="ProductDescription" class="form-control" rows="5" placeholder="Describe your product" required></textarea>
             <span asp-validation-for="ProductDescription" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">
-            <label asp-for="Price" class="control-label">Price</label>
-            <input asp-for="Price" type="number" class="form-control" />
+            <label asp-for="Price" class="control-label">Price ($)</label>
+            <input asp-for="Price" type="number" class="form-control" placeholder="Enter price" step="0.01" required />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">
             <label asp-for="ImageFile" class="control-label">Product Image</label>
-            <input asp-for="ImageFile" type="file" class="form-control" />
+            <input asp-for="ImageFile" type="file" class="form-control" required />
             <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 </div>
 
@@ -59,7 +57,39 @@
         var successMessage = '@(TempData["SuccessMessage"] ?? "")';
 
         if (successMessage && successMessage.length > 0) {
-            alert("Product added successfully on localhost.");
+            alert("Product added successfully.");
         }
     });
 </script>
+
+<style>
+    .product-upload-form {
+        background-color: #f8f9fa; /* Light background for the form */
+        border-radius: 8px; /* Rounded corners */
+        padding: 20px; /* Padding around the form */
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
+
+    .form-control {
+        transition: border-color 0.3s ease; /* Smooth transition for input focus */
+    }
+
+        .form-control:focus {
+            border-color: #007bff; /* Bootstrap primary color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft shadow on focus */
+        }
+
+    .btn-primary {
+        background-color: #007bff; /* Bootstrap primary color */
+        border: none; /* No border */
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+    .text-danger {
+        font-weight: bold; /* Make error messages bold */
+    }
+</style>
