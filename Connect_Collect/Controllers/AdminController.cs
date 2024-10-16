@@ -136,88 +136,244 @@ namespace Connect_Collect.Controllers
         [HttpGet]
         public async Task<IActionResult> CustomerList()
         {
-            var customer = await dbContext.Customer.ToListAsync();
-            return View(customer);
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                var customer = await dbContext.Customer.ToListAsync();
+                return Json(new
+                {
+                    success = false,
+                    message = customer
+                });
+            }
+            else
+            {
+                var customer = await dbContext.Customer.ToListAsync();
+                return View(customer);
+            }
         }
         [HttpGet]
         public async Task<IActionResult> CustomerEdit(Guid id)
         {
-            var customer = await dbContext.Customer.FindAsync(id);
-            return View(customer);
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                var customer = await dbContext.Customer.FindAsync(id);
+                return Json(new
+                {
+                    success = false,
+                    message = "Redirects to Privacy page"
+                });
+            }
+            else
+            {
+                var customer = await dbContext.Customer.FindAsync(id);
+                return View(customer);
+            }
         }
         [HttpPost]
         public async Task<IActionResult> CustomerEdit(Customer viewModel)
         {
-            var customer = await dbContext.Customer.FindAsync(viewModel.CustomerId);
-            if (customer is not null)
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                customer.CustomerName = viewModel.CustomerName;
-                customer.CustomerId = viewModel.CustomerId;
-                customer.Email = viewModel.Email;
-                customer.Password = viewModel.Password;
-                customer.Address = viewModel.Address;
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    var body = await reader.ReadToEndAsync();
+                    var ViewModel = JsonConvert.DeserializeObject<AddCustomerViewModel>(body);
 
-                await dbContext.SaveChangesAsync();
+                    var customer = await dbContext.Customer.FindAsync(ViewModel.CustomerId);
+                    if (customer is not null)
+                    {
+                        customer.CustomerName = ViewModel.CustomerName;
+                        customer.CustomerId = ViewModel.CustomerId;
+                        customer.Email = ViewModel.Email;
+                        customer.Password = ViewModel.Password;
+                        customer.Address = ViewModel.Address;
 
+                        await dbContext.SaveChangesAsync();
+
+                    }
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Customer page"
+                    });
+                }
             }
-            return RedirectToAction("CustomerList", "Admin");
+
+            else
+            {
+
+                var customer = await dbContext.Customer.FindAsync(viewModel.CustomerId);
+                if (customer is not null)
+                {
+                    customer.CustomerName = viewModel.CustomerName;
+                    customer.CustomerId = viewModel.CustomerId;
+                    customer.Email = viewModel.Email;
+                    customer.Password = viewModel.Password;
+                    customer.Address = viewModel.Address;
+
+                    await dbContext.SaveChangesAsync();
+
+                }
+                return RedirectToAction("CustomerList", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> CustomerDelete(Customer viewModel)
         {
-            var customer = await dbContext.Customer
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.CustomerId == viewModel.CustomerId);
-            if (customer is not null)
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                dbContext.Customer.Remove(viewModel);
-                await dbContext.SaveChangesAsync();
+                var customer = await dbContext.Customer
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.CustomerId == viewModel.CustomerId);
+                if (customer is not null)
+                {
+                    dbContext.Customer.Remove(viewModel);
+                    await dbContext.SaveChangesAsync();
+                }
+                return RedirectToAction("CustomerList", "Admin");
             }
-            return RedirectToAction("CustomerList", "Admin");
+
+            else
+            {
+                var customer = await dbContext.Customer
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.CustomerId == viewModel.CustomerId);
+                if (customer is not null)
+                {
+                    dbContext.Customer.Remove(viewModel);
+                    await dbContext.SaveChangesAsync();
+                }
+                return RedirectToAction("CustomerList", "Admin");
+            }
         }
 
 
         [HttpGet]
         public async Task<IActionResult> SellerList()
         {
-            var seller = await dbContext.Seller.ToListAsync();
-            return View(seller);
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                var seller = await dbContext.Seller.ToListAsync();
+                return Json(new
+                {
+                    success = true,
+                    message = seller
+                });
+            }
+            else 
+            {
+                var seller = await dbContext.Seller.ToListAsync();
+                return View(seller);
+            }
+            
         }
         [HttpGet]
         public async Task<IActionResult> SellerEdit(Guid id)
         {
-            var seller = await dbContext.Seller.FindAsync(id);
-            return View(seller);
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                var seller = await dbContext.Seller.FindAsync(id);
+                return Json(new
+                {
+                    success = false,
+                    message = seller
+                });
+            }
+            else
+            {
+                var seller = await dbContext.Seller.FindAsync(id);
+                return View(seller);
+            }    
+            
         }
         [HttpPost]
         public async Task<IActionResult> SellerEdit(Seller viewModel)
         {
-            var seller = await dbContext.Seller.FindAsync(viewModel.SellerId);
-            if (seller is not null)
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                seller.SellerName = viewModel.SellerName;
-                seller.SellerId = viewModel.SellerId;
-                seller.Email = viewModel.Email;
-                seller.Password = viewModel.Password;
-                seller.Contact = viewModel.Contact;
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    var body = await reader.ReadToEndAsync();
+                    var ViewModel = JsonConvert.DeserializeObject<Seller>(body);
 
-                await dbContext.SaveChangesAsync();
+                    var seller = await dbContext.Seller.FindAsync(ViewModel.SellerId);
+                    if (seller is not null)
+                    {
+                        seller.SellerName = ViewModel.SellerName;
+                        seller.SellerId = ViewModel.SellerId;
+                        seller.Email = ViewModel.Email;
+                        seller.Password = ViewModel.Password;
+                        seller.Contact = ViewModel.Contact;
 
+                        await dbContext.SaveChangesAsync();
+
+                    }
+                    var sellerlist = await dbContext.Seller.ToListAsync();
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = sellerlist
+                    });
+                }
             }
-            return RedirectToAction("SellerList", "Admin");
+            else
+            {
+                var seller = await dbContext.Seller.FindAsync(viewModel.SellerId);
+                if (seller is not null)
+                {
+                    seller.SellerName = viewModel.SellerName;
+                    seller.SellerId = viewModel.SellerId;
+                    seller.Email = viewModel.Email;
+                    seller.Password = viewModel.Password;
+                    seller.Contact = viewModel.Contact;
+
+                    await dbContext.SaveChangesAsync();
+
+                }
+                return RedirectToAction("SellerList", "Admin");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> SellerDelete(Seller viewModel)
         {
-            var seller = await dbContext.Seller
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    var body = await reader.ReadToEndAsync();
+                    var ViewModel = JsonConvert.DeserializeObject<Seller>(body);
+
+                    var seller = await dbContext.Seller
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.SellerId == ViewModel.SellerId);
+                    if (seller is not null)
+                    {
+                        dbContext.Seller.Remove(ViewModel);
+                        await dbContext.SaveChangesAsync();
+                    }
+                    var sellerlist = await dbContext.Seller.ToListAsync();
+
+                    return Json(new
+                    {
+                        success = false,
+                        message = sellerlist
+                    });
+                }
+            }
+            else
+            {
+                var seller = await dbContext.Seller
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.SellerId == viewModel.SellerId);
-            if (seller is not null)
-            {
-                dbContext.Seller.Remove(viewModel);
-                await dbContext.SaveChangesAsync();
+                if (seller is not null)
+                {
+                    dbContext.Seller.Remove(viewModel);
+                    await dbContext.SaveChangesAsync();
+                }
+                return RedirectToAction("SellerList", "Admin");
             }
-            return RedirectToAction("SellerList", "Admin");
+            
         }
     }
 }
