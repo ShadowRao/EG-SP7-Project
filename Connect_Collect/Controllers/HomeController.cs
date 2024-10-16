@@ -26,7 +26,21 @@ namespace Connect_Collect.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                // Return JSON response if already logged in and it's an API request
+                return Json(new
+                {
+                    success = true,
+                    message = "Redirects to Home page"
+                });
+            }
+            else { 
+            
             return View();
+            }
+
+
         }
 
         [AllowAnonymous]
@@ -120,7 +134,7 @@ namespace Connect_Collect.Controllers
                         if (CUser != null)
                         {
                             var passwordHasher = new PasswordHasher<Customer>();
-                            var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, model.Password);
+                            var result = passwordHasher.VerifyHashedPassword(CUser, CUser.Password, viewModel.Password);
 
 
 
@@ -148,7 +162,7 @@ namespace Connect_Collect.Controllers
                         if (SUser != null)
                         {
                             var passwordHasher = new PasswordHasher<Seller>();
-                            var result = passwordHasher.VerifyHashedPassword(SUser, SUser.Password, model.Password);
+                            var result = passwordHasher.VerifyHashedPassword(SUser, SUser.Password, viewModel.Password);
 
                             if (result == PasswordVerificationResult.Success)
                             {
@@ -269,6 +283,15 @@ namespace Connect_Collect.Controllers
                         return RedirectToAction("Home", "Admin");
                     }
                 }
+                if (Request.Headers["Accept"].ToString().Contains("application/json"))
+                {
+                    // Return JSON response if already logged in and it's an API request
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Invalid email or password"
+                    });
+                }
 
                 // Add an error message to the model state if login fails
                 ModelState.AddModelError("", "Invalid email or password.");
@@ -282,15 +305,19 @@ namespace Connect_Collect.Controllers
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                // Return JSON response if already logged in and it's an API request
+
                 return Json(new
                 {
                     success = true,
                     message = "Logged out"
                 });
             }
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("SignIn", "Home");
+
+            else
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("SignIn", "Home");
+            }
         }
         [AllowAnonymous]
         public IActionResult Privacy()
