@@ -299,6 +299,7 @@ namespace Connect_Collect.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
