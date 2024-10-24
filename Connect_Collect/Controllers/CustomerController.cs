@@ -25,6 +25,15 @@ namespace Connect_Collect.Controllers
         [HttpGet]
         public IActionResult AddCustomer()
         {
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                // Return JSON response if already logged in and it's an API request
+                return Json(new
+                {
+                    success = false,
+                    message = "Redirects to Privacy page"
+                });
+            }
             return View();
         }
 
