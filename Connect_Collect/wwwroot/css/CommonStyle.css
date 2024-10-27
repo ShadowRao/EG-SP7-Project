@@ -10,7 +10,7 @@
 .gif-background {
     background-image: url("/images/bg.gif");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-position: center;
     height: 140vh; /* Full height of the viewport */
 }
