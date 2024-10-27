@@ -26,6 +26,21 @@ namespace Connect_Collect.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            // Fetch products and include Seller data
+            var products = dbContext.Product
+                .Include(p => p.Seller); // Include related Seller data
+
+            // Manually map to ProductViewModel
+            var productViewModels = products.Select(product => new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                ProductDescription = product.ProductDescription,
+                Price = product.Price,
+                ImageUrl = product.ImageUrl,
+                SellerId = product.SellerId,
+                Seller = product.Seller // Include Seller information in the ViewModel
+            });
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
                 // Return JSON response if already logged in and it's an API request
@@ -37,7 +52,7 @@ namespace Connect_Collect.Controllers
             }
             else { 
             
-            return View();
+            return View(productViewModels);
             }
 
 
