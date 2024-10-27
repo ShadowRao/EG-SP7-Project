@@ -227,20 +227,26 @@ namespace Connect_Collect.Controllers
                 return RedirectToAction("CustomerList", "Admin");
             }
         }
-        [HttpPost]
+        [HttpPost,HttpDelete]
         public async Task<IActionResult> CustomerDelete(Customer viewModel)
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                var customer = await dbContext.Customer
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(x => x.CustomerId == viewModel.CustomerId);
-                if (customer is not null)
+                using (var reader = new StreamReader(Request.Body))
                 {
-                    dbContext.Customer.Remove(viewModel);
-                    await dbContext.SaveChangesAsync();
+                    var body = await reader.ReadToEndAsync();
+                    var ViewModel = JsonConvert.DeserializeObject<CustomerEditModel>(body);
+
+                    var customer = await dbContext.Customer
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(x => x.CustomerId == ViewModel.CustomerId);
+                    if (customer is not null)
+                    {
+                        dbContext.Customer.Remove(customer);
+                        await dbContext.SaveChangesAsync();
+                    }
+                    return RedirectToAction("CustomerList", "Admin");
                 }
-                return RedirectToAction("CustomerList", "Admin");
             }
 
             else
@@ -263,7 +269,7 @@ namespace Connect_Collect.Controllers
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                var seller = await dbContext.Seller.Select(s => new { s.SellerId,s.SellerName,s.Email,s.Orders}).ToListAsync();
+                var seller = await dbContext.Seller.Select(s => new { s.SellerId,s.SellerName,s.Email,s.Contact, s.Orders}).ToListAsync();
                 return Json(new
                 {
                     success = true,
@@ -296,7 +302,7 @@ namespace Connect_Collect.Controllers
             }    
             
         }
-        [HttpPost]
+        [HttpPost,HttpPut]
         public async Task<IActionResult> SellerEdit(Seller viewModel)
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
@@ -312,13 +318,13 @@ namespace Connect_Collect.Controllers
                         seller.SellerName = ViewModel.SellerName;
                         seller.SellerId = ViewModel.SellerId;
                         seller.Email = ViewModel.Email;
-                        seller.Password = ViewModel.Password;
+                        
                         seller.Contact = ViewModel.Contact;
 
                         await dbContext.SaveChangesAsync();
 
                     }
-                    var sellerlist = await dbContext.Seller.ToListAsync();
+                    var sellerlist = await dbContext.Seller.Select(s => new { s.SellerId, s.SellerName, s.Email, s.Orders }).ToListAsync();
 
                     return Json(new
                     {
@@ -344,7 +350,7 @@ namespace Connect_Collect.Controllers
                 return RedirectToAction("SellerList", "Admin");
             }
         }
-        [HttpPost]
+        [HttpPost,HttpDelete]
         public async Task<IActionResult> SellerDelete(Seller viewModel)
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
@@ -362,7 +368,7 @@ namespace Connect_Collect.Controllers
                         dbContext.Seller.Remove(ViewModel);
                         await dbContext.SaveChangesAsync();
                     }
-                    var sellerlist = await dbContext.Seller.ToListAsync();
+                    var sellerlist = await dbContext.Seller.Select(s => new { s.SellerId, s.SellerName, s.Email, s.Orders }).ToListAsync();
 
                     return Json(new
                     {
