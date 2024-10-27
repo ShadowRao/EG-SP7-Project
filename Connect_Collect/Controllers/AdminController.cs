@@ -113,7 +113,11 @@ namespace Connect_Collect.Controllers
                 return Json(new
                 {
                     success = true,
-                    message = admindata
+                    
+                    message = new
+                    {
+                        admindata.Email, admindata.AdminName, admindata.AdminId
+                    }
                 });
             }
             else
@@ -138,7 +142,7 @@ namespace Connect_Collect.Controllers
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                var customer = await dbContext.Customer.ToListAsync();
+                var customer = await dbContext.Customer.Select(c => new {c.CustomerId,c.CustomerName,c.Cart,c.Address,c.Email,c.Contact}).ToListAsync();
                 return Json(new
                 {
                     success = false,
@@ -160,7 +164,15 @@ namespace Connect_Collect.Controllers
                 return Json(new
                 {
                     success = false,
-                    message = "Redirects to Privacy page"
+                    message = new
+                    {
+                        customer.CustomerName,
+                        customer.CustomerId,
+                        customer.Address,
+                        customer.Email,
+                        customer.Contact,
+                        customer.Cart
+                    }
                 });
             }
             else
@@ -169,7 +181,7 @@ namespace Connect_Collect.Controllers
                 return View(customer);
             }
         }
-        [HttpPost]
+        [HttpPost,HttpPut]
         public async Task<IActionResult> CustomerEdit(Customer viewModel)
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
@@ -177,7 +189,7 @@ namespace Connect_Collect.Controllers
                 using (var reader = new StreamReader(Request.Body))
                 {
                     var body = await reader.ReadToEndAsync();
-                    var ViewModel = JsonConvert.DeserializeObject<AddCustomerViewModel>(body);
+                    var ViewModel = JsonConvert.DeserializeObject<CustomerEditModel>(body);
 
                     var customer = await dbContext.Customer.FindAsync(ViewModel.CustomerId);
                     if (customer is not null)
@@ -185,7 +197,6 @@ namespace Connect_Collect.Controllers
                         customer.CustomerName = ViewModel.CustomerName;
                         customer.CustomerId = ViewModel.CustomerId;
                         customer.Email = ViewModel.Email;
-                        customer.Password = ViewModel.Password;
                         customer.Address = ViewModel.Address;
 
                         await dbContext.SaveChangesAsync();
@@ -194,14 +205,13 @@ namespace Connect_Collect.Controllers
                     return Json(new
                     {
                         success = false,
-                        message = "Customer page"
+                        message = customer
                     });
                 }
             }
 
             else
             {
-
                 var customer = await dbContext.Customer.FindAsync(viewModel.CustomerId);
                 if (customer is not null)
                 {
@@ -253,7 +263,7 @@ namespace Connect_Collect.Controllers
         {
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
             {
-                var seller = await dbContext.Seller.ToListAsync();
+                var seller = await dbContext.Seller.Select(s => new { s.SellerId,s.SellerName,s.Email,s.Orders}).ToListAsync();
                 return Json(new
                 {
                     success = true,

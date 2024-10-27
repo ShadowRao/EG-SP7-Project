@@ -6,14 +6,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-
 public class Program
 {
     public static void Main(string[] args)
     {
-
-
         var builder = WebApplication.CreateBuilder(args);
+
         // Add services to the container.
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
@@ -31,11 +29,10 @@ public class Program
                             .Build();
             options.Filters.Add(new AuthorizeFilter(policy));
         });
-        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddAuthorization();
         builder.Services.AddSingleton<EmailService>();
-
-        // Add authentication services
 
         var app = builder.Build();
 
@@ -44,13 +41,15 @@ public class Program
         {
             app.UseExceptionHandler("/Home/Error");
         }
+
         app.UseStaticFiles();
-        app.UseAuthentication(); // Use authentication
-        app.UseAuthorization();
-        
+
+        // Handle 404 and other status code errors
+        app.UseStatusCodePagesWithReExecute("/Home/HandleError", "?statusCode={0}");
 
         app.UseRouting();
 
+        app.UseAuthentication(); // Use authentication
         app.UseAuthorization();
 
         app.MapControllerRoute(
@@ -59,7 +58,4 @@ public class Program
 
         app.Run();
     }
-
-
-
 }

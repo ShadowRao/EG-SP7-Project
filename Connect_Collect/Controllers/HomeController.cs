@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Security.Claims;
 using Connect_Collect.Data;
 using Connect_Collect.Models;
@@ -32,7 +32,7 @@ namespace Connect_Collect.Controllers
                 return Json(new
                 {
                     success = true,
-                    message = "Redirects to Home page"
+                    message = "We are EG's Internal Flea Market & Community Hub—your one-stop platform for everything from decluttering to settling into a new city! Here at EG, we're not just pioneers in Nordic vertical software; we’re all about building connections too. Whether you're looking to sell your gadgets, lease your apartment, or lend a hand to a newcomer finding their way around, this is the place for you! Think of it as EG’s own little OLX, where colleagues help colleagues, making relocations, sales, and city life that much easier. Happy browsing and connecting!"
                 });
             }
             else { 
@@ -64,7 +64,23 @@ namespace Connect_Collect.Controllers
                     return View("AlreadyLoggedIn");
                 }
             }
-                return View();
+            else
+            {
+                if (Request.Headers["Accept"].ToString().Contains("application/json"))
+                {
+                    // Return JSON response if already logged in and it's an API request
+                    return Json(new
+                    {
+                        success = true,
+                        message = "Redirected to Sign In page"
+                    });
+                }
+                else
+                {
+                    return View();
+                }
+            }
+                
         }
 
 
@@ -75,22 +91,6 @@ namespace Connect_Collect.Controllers
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
 
-            /*if (!ModelState.IsValid)
-            {
-                if (Request.Headers["Accept"].ToString().Contains("application/json"))
-                {
-                    // Return JSON response if already logged in and it's an API request
-                    return Json(new
-                    {
-                        success = false,
-                        message = "Invalid"
-                    });
-                }
-                else
-                {
-                    return View(model);
-                }
-            }*/
 
             if (isAuthenticated == true)
             {
@@ -100,7 +100,7 @@ namespace Connect_Collect.Controllers
                     // Return JSON response if already logged in and it's an API request
                     return Json(new
                     {
-                        success = false,
+                        success = true,
                         message = "Login accepted and redirected to dashboard"
                     });
                 }
@@ -299,25 +299,48 @@ namespace Connect_Collect.Controllers
             }
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
             {
-                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-                return Json(new
+                if (Request.Headers["Accept"].ToString().Contains("application/json"))
                 {
-                    success = true,
-                    message = "Logged out"
-                });
-            }
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+                    return Json(new
+                    {
+                        success = true,
+                        message = "Logged out"
+                    });
+                }
+
+                else
+                {
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    return RedirectToAction("SignIn", "Home");
+                }
+            }
             else
             {
-                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                return RedirectToAction("SignIn", "Home");
+                if (Request.Headers["Accept"].ToString().Contains("application/json"))
+                {
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    return Json(new
+                    {
+                        success = true,
+                        message = "No user was logged In"
+                    });
+                }
+
+                else
+                {
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    return RedirectToAction("SignIn", "Home");
+                }
             }
         }
         [AllowAnonymous]
@@ -329,7 +352,7 @@ namespace Connect_Collect.Controllers
                 return Json(new
                 {
                     success = false,
-                    message = "Redirects to Privacy page"
+                    message = "Welcome to our Privacy Page! 🛡️At Connect&Collect, we take your privacy seriously, so rest easy! Your contact details will only be shared if and when another user is genuinely interested in purchasing the awesome products you’ve listed. Other than that, your personal information stays locked up tighter than a secret recipe—safe with us and not shared with anyone.We also encourage you to keep things fun and fair by posting only items in good, usable condition. After all, no one wants a surprise when buying! Remember, respect for each other makes this marketplace work like a charm. 😊If you encounter any issues or have concerns about a listing, don’t hesitate to give us a shout by reporting it—we’re here to keep this community awesome!"
                 });
             }
             else
@@ -343,6 +366,26 @@ namespace Connect_Collect.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [AllowAnonymous]
+        public IActionResult HandleError(int statusCode)
+        {
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = statusCode == 404 ? "Resource not found." : "An error occurred."
+                });
+            }
+
+            if (statusCode == 404)
+            {
+                return View("404");  // Ensure you have Views/Shared/404.cshtml
+            }
+
+            return View("Error");  // Default error page for other status codes
         }
     }
 }
