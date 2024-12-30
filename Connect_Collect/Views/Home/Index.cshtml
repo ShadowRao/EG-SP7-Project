@@ -8,7 +8,7 @@
 
 <div class="home-container">
     <h1 class="display-4">Welcome to Connect & Collect!</h1>
-    <p>We are EG's Internal Flea Market & Community Hub—your one-stop platform for everything from decluttering to settling into a new city! Here at EG, we're not just pioneers in Nordic vertical software; we’re all about building connections too. Whether you're looking to sell your gadgets, lease your apartment, or lend a hand to a newcomer finding their way around, this is the place for you! Think of it as EG’s own little OLX, where colleagues help colleagues, making relocations, sales, and city life that much easier. Happy browsing and connecting!</p>
+    <p>We are EG's Internal Market & Community Hub—your one-stop platform for everything from decluttering to settling into a new city! Here at EG, we're not just pioneers in Nordic vertical software; we’re all about building connections too. Whether you're looking to sell your gadgets, lease your apartment, or lend a hand to a newcomer finding their way around, this is the place for you! Think of it as EG’s own little OLX, where colleagues help colleagues, making relocations, sales, and city life that much easier. Happy browsing and connecting!</p>
 </div>
 
 
@@ -77,78 +77,7 @@
 
 <br>
 
-<br>
-<h2 class="text-center">Available Products</h2>
-<div id="productCarousel" style="padding-top:1px;" class="carousel slide" data-ride="carousel">
 
-<!-- Display Available Products -->
-
-
-<div class="container">
-    <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card h-100 card-hover">
-                    <img src="@(!string.IsNullOrEmpty(product.ImageUrl) ? product.ImageUrl : Url.Content("~/images/placeholder.jpg"))"
-                         class="card-img-top"
-                         alt="@(!string.IsNullOrEmpty(product.ImageUrl) ? product.ProductName : "No Image")"
-                         style="height: 200px; object-fit: cover;" />
-
-                    <div class="card-body">
-                        <h5 class="card-title">@product.ProductName</h5>
-                        <p class="text-muted">Sold by: @product.Seller.SellerName</p>
-                        <h6 class="text-primary">$@product.Price</h6>
-                    </div>
-
-                    <div class="card-footer text-center">
-                        <button class="btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#productModal"
-                                data-id="@product.ProductId"
-                                data-name="@product.ProductName"
-                                data-description="@product.ProductDescription"
-                                data-price="@product.Price"
-                                data-image-url="@product.ImageUrl">
-                            View Details
-                        </button>
-
-                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId" class="btn btn-success">Send Request</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-
-
-</div>
-</div>
-
-
-
-
-<!-- Product Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productModalLabel">Product Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="Product Image" class="img-fluid mb-3" />
-                <h5 id="modalProductName"></h5>
-                <p id="modalProductDescription"></p>
-                <h6 class="text-primary" id="modalProductPrice"></h6>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style>
     /* Keep existing styles and add new ones for product display */
