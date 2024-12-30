@@ -55,7 +55,19 @@ After the restore completes, verify the database:
 2. Click on **File** > **Open** > **Project/Solution...**.
 3. Navigate to the directory where the repository is cloned.
 4. Select the solution file (usually ends with `.sln`) and click **Open**.
-5. Wait for Visual Studio to load the project and restore dependencies if necessary.
+5. Install the dependencies
+   Click on **Tools**  > **NuGet Package Manager** > **Manage NuGet Packages for Solution** and then install the following packages
+   - MailKit
+   - Microsoft.AspNetCore.Identity
+   - Microsoft.AspNetCore.Mvc.Testing
+   - Microsoft.EntityFrameworkCore
+   - Microsoft.EntityFrameworkCore.Analyzers
+   - Microsoft.EntityFrameworkCore.SqlServer
+   - Microsoft.EntityFrameworkCore.Tools
+   - MimeKit
+   - Netonsoft.Json
+   
+
 
 ### 2. Update the Server Name in `appsettings.json`
 
