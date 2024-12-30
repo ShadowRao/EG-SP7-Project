@@ -65,7 +65,7 @@ After the restore completes, verify the database:
    - Microsoft.EntityFrameworkCore.SqlServer
    - Microsoft.EntityFrameworkCore.Tools
    - MimeKit
-   - Netonsoft.Json
+   - Newtonsoft.Json
    
 
 
